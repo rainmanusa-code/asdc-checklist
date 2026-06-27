@@ -299,21 +299,14 @@
       const d = (data.record||{}).asdc_checklist || {};
       state.checks = d.checks || {};
       state.notes = d.notes || {};
-      state.taskOrder = d.taskOrder || null;
       state.lastUpdated = d.lastUpdated || null;
-      // Apply saved task order (deletions)
-      if (state.taskOrder) TASKS = TASKS.filter(t => state.taskOrder.includes(t.id));
+      // taskOrder ignored — tasks always come from code, never filtered by cloud state
       updateLastUpdated(state.lastUpdated);
       setSyncStatus('Synced','ok');
     } catch {
       setSyncStatus('Offline — changes save locally','error');
       const local = localStorage.getItem(STORAGE_KEY);
-      if (local) try { const p=JSON.parse(local); state=Object.assign(state,p); if(state.taskOrder) {
-          // Reorder existing tasks to match saved order, but keep any NEW tasks not in saved order
-          const ordered = state.taskOrder.filter(id => TASKS.find(t=>t.id===id)).map(id=>TASKS.find(t=>t.id===id));
-          const newTasks = TASKS.filter(t=>!state.taskOrder.includes(t.id));
-          TASKS = [...ordered, ...newTasks];
-        } } catch {}
+      if (local) try { const p=JSON.parse(local); state.checks=p.checks||{}; state.notes=p.notes||{}; state.lastUpdated=p.lastUpdated||null; } catch {}
     }
     render();
   }
