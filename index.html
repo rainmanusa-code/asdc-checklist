@@ -274,7 +274,7 @@
   const API_KEY = '$2a$10$4aH/RKWn7NmW7cwBiDm09OBT4bHwMecicfSywrrHQ1cjssRzCA1IO';
   const STORAGE_KEY = 'asdc_checklist_v1';
   const PIN_SESSION_KEY = 'asdc_pin_ok';
-  const CORRECT_PIN_HASH = 'b7e28bd18e30e3ed48d4b84e9a85d8e27b2d0e1f2a3c4d5e6f7a8b9c0d1e2f3'; // PIN: 7979
+  const CORRECT_PIN_HASH = '9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0'; // PIN: 0000
   const TOTAL = 13;
 
   let pinEntry = '';
@@ -287,9 +287,8 @@
       await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pinEntry))
     )).map(b => b.toString(16).padStart(2,'0')).join('');
 
-    // Use same PIN as FTG (7979)
-    // SHA-256 of "7979"
-    const correctHash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('7979'));
+    // Use PIN 0000
+    const correctHash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('0000'));
     const correctStr = Array.from(new Uint8Array(correctHash)).map(b => b.toString(16).padStart(2,'0')).join('');
 
     if (hash === correctStr) {
