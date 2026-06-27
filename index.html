@@ -335,14 +335,43 @@
   function queueSave() { clearTimeout(saveTimer); saveTimer = setTimeout(saveToCloud, 1200); }
 
   // ── RENDER ──
+  // Section → group mapping
+  const WEBSITE_SECTIONS = new Set([
+    '🔴 Critical — Fix Before Op-Ed Goes Live',
+    '🟡 Important — Fix Soon',
+    '🟢 Nice to Have — When Time Allows'
+  ]);
+  const CONTENT_SECTIONS = new Set([
+    '📋 Content Strategy',
+    '📅 Content Schedule — 2026–2027'
+  ]);
+
   function render() {
     const container = document.getElementById('taskList');
     container.innerHTML = '';
     let currentSection = '';
+    let currentGroup = '';
     let card = null;
     let globalNum = 0;
 
     TASKS.forEach(task => {
+      // Determine which top-level group this task belongs to
+      const group = WEBSITE_SECTIONS.has(task.section) ? 'website' : 'content';
+
+      // Inject group header when group changes
+      if (group !== currentGroup) {
+        currentGroup = group;
+        const groupDiv = document.createElement('div');
+        groupDiv.style.cssText = 'margin:32px 0 20px';
+        if (group === 'website') {
+          groupDiv.innerHTML = `<div style="display:flex;align-items:center;gap:12px"><div style="flex:1;height:2px;background:#E5E7EB"></div><span style="font-size:13px;font-weight:700;color:#374151;background:#F9FAFB;border:1.5px solid #E5E7EB;padding:6px 18px;border-radius:20px;white-space:nowrap">🌐 SECTION 1 — Website Updates</span><div style="flex:1;height:2px;background:#E5E7EB"></div></div>`;
+        } else {
+          groupDiv.innerHTML = `<div style="display:flex;align-items:center;gap:12px"><div style="flex:1;height:2px;background:#E5E7EB"></div><span style="font-size:13px;font-weight:700;color:#374151;background:#F9FAFB;border:1.5px solid #E5E7EB;padding:6px 18px;border-radius:20px;white-space:nowrap">📅 SECTION 2 — Content Schedule 2026–2027</span><div style="flex:1;height:2px;background:#E5E7EB"></div></div>`;
+        }
+        container.appendChild(groupDiv);
+        currentSection = ''; // reset so section header re-renders
+      }
+
       if (task.section !== currentSection) {
         currentSection = task.section;
         const sec = document.createElement('div');
