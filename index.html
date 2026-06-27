@@ -74,6 +74,10 @@
   .page-tag{font-size:10px;font-weight:600;color:#60a5fa;background:#1e3a5f;padding:1px 7px;border-radius:8px}
   .done-stamp{font-size:11px;color:#4ade80;font-weight:600;margin-top:4px;display:none}
   .item.done .done-stamp{display:block}
+  .note-area{margin-top:10px;width:100%;background:#0f1117;border:1px solid #2d3748;border-radius:6px;color:#9ca3af;font-size:12px;font-family:inherit;padding:8px 10px;resize:vertical;min-height:54px;transition:border-color 0.2s;line-height:1.5}
+  .note-area:focus{outline:none;border-color:#2E86C1;color:#e8eaf0}
+  .note-area::placeholder{color:#4b5563}
+  .note-label{font-size:10px;font-weight:600;color:#4b5563;letter-spacing:0.5px;margin-top:10px;text-transform:uppercase;display:block}
 
   .all-done-banner{display:none;background:linear-gradient(135deg,#14532d,#166534);color:white;text-align:center;padding:20px;border-radius:10px;margin-bottom:28px;font-size:16px;font-weight:600;border:1px solid #15803d}
   .all-done-banner.show{display:block}
@@ -144,6 +148,8 @@
             <div class="item-header"><span class="item-number">01</span><span class="item-title">Fix all 5 FAQ answers on About Us page</span><span class="page-tag">About Us</span></div>
             <div class="item-desc">Every FAQ shows the same wrong answer: "Yes, we accept most major dental insurance plans." Questions include: What services do you offer? How often should I visit? What can I expect on my first visit? Do you offer emergency care? Each needs its own correct answer.</div>
             <div class="done-stamp">✓ Completed</div>
+            <span class="note-label">Notes</span>
+            <textarea class="note-area" id="note_item1" placeholder="Add a note..." onclick="event.stopPropagation()" oninput="saveNote(this)"></textarea>
           </div>
         </div>
         <div class="item" onclick="toggle(this)" id="item2">
@@ -152,6 +158,8 @@
             <div class="item-header"><span class="item-number">02</span><span class="item-title">Add NJ Medicaid / NJ FamilyCare to the insurance section</span><span class="page-tag">Homepage</span></div>
             <div class="item-desc">Insurance logos show Aetna, Blue Cross, Cigna, Delta, Guardian, Humana, MetLife — but NJ Medicaid is missing. The op-ed explicitly states the practice accepts NJ Medicaid. Any reader visiting after reading the article will not find confirmation. Add NJ FamilyCare before the article goes live.</div>
             <div class="done-stamp">✓ Completed</div>
+            <span class="note-label">Notes</span>
+            <textarea class="note-area" id="note_item2" placeholder="Add a note..." onclick="event.stopPropagation()" oninput="saveNote(this)"></textarea>
           </div>
         </div>
         <div class="item" onclick="toggle(this)" id="item3">
@@ -160,6 +168,8 @@
             <div class="item-header"><span class="item-number">03</span><span class="item-title">Fix New Patient Special price — $109 vs $129 vs $129.99</span><span class="page-tag">Homepage</span></div>
             <div class="item-desc">Three different prices appear for the same offer: hero section shows $109, pricing cards show $129, the booking form shows $129.99. Pick one and apply consistently across every page, section, and form.</div>
             <div class="done-stamp">✓ Completed</div>
+            <span class="note-label">Notes</span>
+            <textarea class="note-area" id="note_item3" placeholder="Add a note..." onclick="event.stopPropagation()" oninput="saveNote(this)"></textarea>
           </div>
         </div>
         <div class="item" onclick="toggle(this)" id="item4">
@@ -168,6 +178,8 @@
             <div class="item-header"><span class="item-number">04</span><span class="item-title">Publish the op-ed under the Articles section</span><span class="page-tag">Articles</span></div>
             <div class="item-desc">The op-ed "Your Neighbors Have Dental Insurance — And Still Can't Find a Dentist" must be published on alwayssmiledentalcare.com/articles/ BEFORE submitting to any newspaper. This establishes the canonical URL and gives newspapers a live link to reference.</div>
             <div class="done-stamp">✓ Completed</div>
+            <span class="note-label">Notes</span>
+            <textarea class="note-area" id="note_item4" placeholder="Add a note..." onclick="event.stopPropagation()" oninput="saveNote(this)"></textarea>
           </div>
         </div>
       </div>
@@ -183,6 +195,8 @@
             <div class="item-header"><span class="item-number">05</span><span class="item-title">Add NYU College of Dentistry credential to Dr. Farida's bio</span><span class="page-tag">Homepage · About Us</span></div>
             <div class="item-desc">The bio mentions "over 10 years of experience" but never mentions NYU. A reviewer wrote: "I came across a Dr. who had graduated from NYU, and I knew that I will not be wrong." Add: "Dr. Fanuswala earned her DDS from NYU College of Dentistry, one of the nation's leading dental schools."</div>
             <div class="done-stamp">✓ Completed</div>
+            <span class="note-label">Notes</span>
+            <textarea class="note-area" id="note_item5" placeholder="Add a note..." onclick="event.stopPropagation()" oninput="saveNote(this)"></textarea>
           </div>
         </div>
         <div class="item" onclick="toggle(this)" id="item6">
@@ -191,6 +205,8 @@
             <div class="item-header"><span class="item-number">06</span><span class="item-title">Ensure Negative Review is not seen on Website</span><span class="page-tag">Homepage · About Us</span></div>
             <div class="item-desc">The 1-star review from "S A" is visible in the testimonials section on both pages. Check the Trustindex / Google Reviews widget settings to filter reviews below a minimum star rating. The review stays on Google — but should not appear on your own website pages.</div>
             <div class="done-stamp">✓ Completed</div>
+            <span class="note-label">Notes</span>
+            <textarea class="note-area" id="note_item6" placeholder="Add a note..." onclick="event.stopPropagation()" oninput="saveNote(this)"></textarea>
           </div>
         </div>
         <div class="item" onclick="toggle(this)" id="item7">
@@ -199,6 +215,8 @@
             <div class="item-header"><span class="item-number">07</span><span class="item-title">Remove "dental practices throughout the world" from About Us</span><span class="page-tag">About Us</span></div>
             <div class="item-desc">The About Us intro includes leftover template copy: "With dental practices throughout the world." Always Smile Dental Care is one practice in North Brunswick, NJ. Remove or replace this sentence entirely.</div>
             <div class="done-stamp">✓ Completed</div>
+            <span class="note-label">Notes</span>
+            <textarea class="note-area" id="note_item7" placeholder="Add a note..." onclick="event.stopPropagation()" oninput="saveNote(this)"></textarea>
           </div>
         </div>
         <div class="item" onclick="toggle(this)" id="item8">
@@ -207,6 +225,8 @@
             <div class="item-header"><span class="item-number">08</span><span class="item-title">Fix "Franklin Towship" typo in footer</span><span class="page-tag">All Pages — Footer</span></div>
             <div class="item-desc">The footer lists "Franklin Towship" — missing the 'n'. Should read "Franklin Township." Appears in both the community links list and footer neighborhood section on all pages.</div>
             <div class="done-stamp">✓ Completed</div>
+            <span class="note-label">Notes</span>
+            <textarea class="note-area" id="note_item8" placeholder="Add a note..." onclick="event.stopPropagation()" oninput="saveNote(this)"></textarea>
           </div>
         </div>
         <div class="item" onclick="toggle(this)" id="item9">
@@ -215,6 +235,8 @@
             <div class="item-header"><span class="item-number">09</span><span class="item-title">Fix Wednesday missing from appointment booking form</span><span class="page-tag">Homepage · Booking Form</span></div>
             <div class="item-desc">Hours show Tuesday, Wednesday, Friday, Saturday but the booking form only lists Tuesday, Friday, Saturday — Wednesday is missing. Either add Wednesday to the form or remove it from the hours display.</div>
             <div class="done-stamp">✓ Completed</div>
+            <span class="note-label">Notes</span>
+            <textarea class="note-area" id="note_item9" placeholder="Add a note..." onclick="event.stopPropagation()" oninput="saveNote(this)"></textarea>
           </div>
         </div>
         <div class="item" onclick="toggle(this)" id="item10">
@@ -223,6 +245,8 @@
             <div class="item-header"><span class="item-number">10</span><span class="item-title">Fix "Guranteed" typo on pricing card</span><span class="page-tag">Homepage</span></div>
             <div class="item-desc">The Free Second Opinion pricing card reads "Guranteed discount." Fix the spelling to "Guaranteed" in both the card headline and the bullet point below it.</div>
             <div class="done-stamp">✓ Completed</div>
+            <span class="note-label">Notes</span>
+            <textarea class="note-area" id="note_item10" placeholder="Add a note..." onclick="event.stopPropagation()" oninput="saveNote(this)"></textarea>
           </div>
         </div>
       </div>
@@ -238,6 +262,8 @@
             <div class="item-header"><span class="item-number">11</span><span class="item-title">Update "hundreds of families" to reflect true scale</span><span class="page-tag">Homepage · About Us</span></div>
             <div class="item-desc">The bio says "hundreds of families." With 143 Google reviews and a fully booked schedule the practice has seen thousands of patients. Update to "thousands of patients" or pull a specific number from the practice management system.</div>
             <div class="done-stamp">✓ Completed</div>
+            <span class="note-label">Notes</span>
+            <textarea class="note-area" id="note_item11" placeholder="Add a note..." onclick="event.stopPropagation()" oninput="saveNote(this)"></textarea>
           </div>
         </div>
         <div class="item" onclick="toggle(this)" id="item12">
@@ -246,6 +272,8 @@
             <div class="item-header"><span class="item-number">12</span><span class="item-title">Update hours when GP associate is hired and new days open</span><span class="page-tag">Homepage · All Pages</span></div>
             <div class="item-desc">Once a GP associate is hired and the practice expands, update hours on the homepage, contact page, Google Business Profile, and all directory listings simultaneously. Inconsistent hours across platforms is a common SEO problem.</div>
             <div class="done-stamp">✓ Completed</div>
+            <span class="note-label">Notes</span>
+            <textarea class="note-area" id="note_item12" placeholder="Add a note..." onclick="event.stopPropagation()" oninput="saveNote(this)"></textarea>
           </div>
         </div>
         <div class="item" onclick="toggle(this)" id="item13">
@@ -254,6 +282,8 @@
             <div class="item-header"><span class="item-number">13</span><span class="item-title">Personalize the About Us mission and vision text</span><span class="page-tag">About Us</span></div>
             <div class="item-desc">Current mission and vision are generic template language. Rewrite to reflect the practice's actual values — accessible care for all insurance types, serving the diverse Middlesex County community, dental care for all ages — using the same voice as the op-ed.</div>
             <div class="done-stamp">✓ Completed</div>
+            <span class="note-label">Notes</span>
+            <textarea class="note-area" id="note_item13" placeholder="Add a note..." onclick="event.stopPropagation()" oninput="saveNote(this)"></textarea>
           </div>
         </div>
       </div>
@@ -278,7 +308,7 @@
   const TOTAL = 13;
 
   let pinEntry = '';
-  let state = { checks: {}, lastUpdated: null };
+  let state = { checks: {}, notes: {}, lastUpdated: null };
   let saveTimer = null;
 
   // ── PIN ──
@@ -353,6 +383,7 @@
       // Use asdc_checklist namespace to avoid FTG conflicts
       const checklistData = record.asdc_checklist || {};
       state.checks = checklistData.checks || {};
+      state.notes = checklistData.notes || {};
       state.lastUpdated = checklistData.lastUpdated || null;
       updateLastUpdated(state.lastUpdated);
       setSyncStatus('Synced', 'ok');
@@ -360,7 +391,7 @@
       setSyncStatus('Offline — changes save locally', 'error');
       const local = localStorage.getItem(STORAGE_KEY);
       if (local) {
-        try { const p = JSON.parse(local); state.checks = p.checks || {}; state.lastUpdated = p.lastUpdated || null; } catch {}
+        try { const p = JSON.parse(local); state.checks = p.checks || {}; state.notes = p.notes || {}; state.lastUpdated = p.lastUpdated || null; } catch {}
       }
     }
     apply();
@@ -379,7 +410,7 @@
       });
       const currentData = getRes.ok ? await getRes.json() : { record: {} };
       const mergedRecord = Object.assign({}, currentData.record || {}, {
-        asdc_checklist: { checks: state.checks, lastUpdated: state.lastUpdated }
+        asdc_checklist: { checks: state.checks, notes: state.notes, lastUpdated: state.lastUpdated }
       });
       const putRes = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
         method: 'PUT',
@@ -391,6 +422,13 @@
     } catch(e) {
       setSyncStatus('Saved locally (cloud unavailable)', 'error');
     }
+  }
+
+  function saveNote(ta) {
+    const itemEl = ta.closest('.item');
+    if (!itemEl) return;
+    state.notes[itemEl.id] = ta.value;
+    queueSave();
   }
 
   function queueSave() {
@@ -411,6 +449,8 @@
   function apply() {
     document.querySelectorAll('.item').forEach(el => {
       el.classList.toggle('done', !!state.checks[el.id]);
+      const ta = document.getElementById('note_' + el.id);
+      if (ta && state.notes[el.id] !== undefined) ta.value = state.notes[el.id];
     });
     updateProgress();
   }
