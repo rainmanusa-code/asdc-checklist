@@ -6,12 +6,12 @@
 <title>Always Smile Dental Care — ATG</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#ffffff;color:#111111;min-height:100vh;font-size:16px}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#F8FAFC;color:#111;font-size:15px;min-height:100vh}
 
   /* ── PIN ── */
   #pinScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;background:linear-gradient(135deg,#1A5276 0%,#2E86C1 100%)}
-  #pinScreen h2{font-size:24px;font-weight:700;color:#fff;margin-bottom:8px}
-  #pinScreen p{font-size:15px;color:#AED6F1;margin-bottom:32px}
+  #pinScreen h2{font-size:24px;font-weight:700;color:#fff;margin-bottom:6px}
+  #pinScreen p{font-size:14px;color:#AED6F1;margin-bottom:28px}
   .pin-dots{display:flex;gap:14px;margin-bottom:28px}
   .pin-dot{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);transition:all 0.15s}
   .pin-dot.filled{background:white;border-color:white}
@@ -19,91 +19,136 @@
   .pin-btn{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;font-size:22px;font-weight:500;cursor:pointer;transition:all 0.15s}
   .pin-btn:hover{background:rgba(255,255,255,0.25)}
   .pin-btn:active{transform:scale(0.93)}
-  #pinError{color:#fca5a5;font-size:14px;margin-top:16px;display:none}
+  #pinError{color:#fca5a5;font-size:13px;margin-top:14px;display:none}
   #pinError.show{display:block}
 
   /* ── APP ── */
-  #app{display:none}
+  #app{display:none;min-height:100vh;flex-direction:column}
 
-  .header{background:linear-gradient(135deg,#1A5276 0%,#2E86C1 100%);padding:32px 24px 24px;color:white}
-  .header-inner{max-width:900px;margin:0 auto}
-  .header h1{font-size:24px;font-weight:700}
-  .header p{font-size:14px;color:#AED6F1;margin-top:4px}
-  .sync-bar{display:flex;align-items:center;gap:8px;margin-top:10px}
-  .sync-dot{width:8px;height:8px;border-radius:50%;background:#4ade80;flex-shrink:0;transition:background 0.3s}
+  /* ── HEADER ── */
+  .header{background:linear-gradient(135deg,#1A5276 0%,#2E86C1 100%);padding:24px 24px 0;color:white;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.15)}
+  .header-top{max-width:960px;margin:0 auto}
+  .header h1{font-size:20px;font-weight:700;margin-bottom:2px}
+  .header-sub{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .header-sub p{font-size:13px;color:#AED6F1}
+  .sync-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;flex-shrink:0}
   .sync-dot.syncing{background:#f59e0b;animation:pulse 1s infinite}
   .sync-dot.error{background:#ef4444}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
-  .sync-status{font-size:13px;opacity:0.8}
-  #lastUpdated{font-size:12px;opacity:0.55;margin-left:4px}
-  .progress-bar-wrap{background:rgba(255,255,255,0.2);border-radius:20px;height:10px;margin-top:16px;overflow:hidden}
-  .progress-bar-fill{height:100%;background:#58D68D;border-radius:20px;transition:width 0.4s ease;width:0%}
-  .progress-label{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
-  .progress-label span{font-size:13px;color:#AED6F1}
-  .progress-label strong{font-size:15px;color:white}
+  .sync-status{font-size:11px;color:rgba(255,255,255,0.6)}
+  #lastUpdated{font-size:11px;color:rgba(255,255,255,0.4)}
 
-  .container{max-width:900px;margin:0 auto;padding:28px 20px 90px}
-  .section{margin-bottom:32px}
-  .section-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-  .priority-badge{font-size:12px;font-weight:700;letter-spacing:0.5px;padding:4px 12px;border-radius:20px;text-transform:uppercase;flex-shrink:0}
+  /* ── TABS ── */
+  .tabs{display:flex;gap:4px;max-width:960px;margin:0 auto;overflow-x:auto;padding-bottom:0}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:10px 10px 0 0;cursor:pointer;font-size:13px;font-weight:600;color:rgba(255,255,255,0.65);background:rgba(255,255,255,0.08);border:none;white-space:nowrap;transition:all 0.2s;flex-shrink:0}
+  .tab:hover{background:rgba(255,255,255,0.15);color:white}
+  .tab.active{background:white;color:#1A5276}
+  .tab-pill{font-size:11px;font-weight:700;padding:2px 7px;border-radius:10px;background:rgba(255,255,255,0.2);color:white}
+  .tab.active .tab-pill{background:#EEF2FF;color:#1A5276}
+  .tab-pill.complete{background:#16A34A;color:white}
+  .tab.active .tab-pill.complete{background:#16A34A;color:white}
+
+  /* ── CONTENT AREA ── */
+  .content{max-width:960px;margin:0 auto;padding:24px 20px 80px}
+  .tab-panel{display:none}
+  .tab-panel.active{display:block}
+
+  /* ── DASHBOARD ── */
+  .dashboard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:28px}
+  .dash-card{background:white;border:1.5px solid #E5E7EB;border-radius:12px;padding:18px 20px;cursor:pointer;transition:all 0.2s}
+  .dash-card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.1);transform:translateY(-2px)}
+  .dash-card-icon{font-size:24px;margin-bottom:8px}
+  .dash-card-title{font-size:14px;font-weight:700;color:#111;margin-bottom:6px}
+  .dash-card-progress{font-size:13px;color:#6B7280;margin-bottom:8px}
+  .dash-bar-bg{background:#F3F4F6;border-radius:6px;height:6px;overflow:hidden}
+  .dash-bar-fill{height:100%;border-radius:6px;transition:width 0.5s ease}
+  .next-task{background:#F8FAFC;border:1.5px solid #E5E7EB;border-radius:10px;padding:14px 18px;margin-top:6px;font-size:12px;color:#374151;line-height:1.4}
+  .next-task-label{font-size:10px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+
+  /* ── SECTION HEADER ── */
+  .section{margin-bottom:24px}
+  .section-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .priority-badge{font-size:12px;font-weight:700;letter-spacing:0.4px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
   .badge-red{background:#FEE2E2;color:#B91C1C}
   .badge-amber{background:#FEF3C7;color:#92400E}
   .badge-green{background:#D1FAE5;color:#065F46}
-  .badge-seo{background:#FEF3C7;color:#92400E}
   .badge-blue{background:#DBEAFE;color:#1E40AF}
+  .badge-purple{background:#EDE9FE;color:#5B21B6}
+  .badge-seo{background:#FEF3C7;color:#92400E}
 
-  .card{background:#ffffff;border:1.5px solid #E5E7EB;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+  /* ── CARDS ── */
+  .card{background:white;border:1.5px solid #E5E7EB;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
 
-  .item{display:flex;align-items:flex-start;gap:16px;padding:18px 20px;border-bottom:1.5px solid #F3F4F6;transition:background 0.15s;position:relative}
+  /* ── ITEMS ── */
+  .item{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;border-bottom:1.5px solid #F3F4F6;transition:background 0.15s;position:relative}
   .item:last-child{border-bottom:none}
   .item:hover{background:#FAFAFA}
-  .item.done{background:#F0FDF4}
-  .item.done .item-title{text-decoration:line-through;color:#9CA3AF}
-  .item.done .item-desc{color:#D1D5DB}
+  .item.done{background:#F0FDF4;padding:11px 18px}
+  .item.done .item-title{text-decoration:line-through;color:#9CA3AF;font-size:14px}
 
-  .checkbox{width:24px;height:24px;border-radius:7px;border:2px solid #D1D5DB;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:2px;transition:all 0.2s;background:white;cursor:pointer}
+  .checkbox{width:24px;height:24px;border-radius:7px;border:2px solid #D1D5DB;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all 0.2s;background:white;cursor:pointer}
   .item.done .checkbox{background:#16A34A;border-color:#16A34A}
   .checkbox svg{display:none}
   .item.done .checkbox svg{display:block}
 
   .item-body{flex:1;min-width:0}
-  .item-header{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
-  .item-number{font-size:12px;font-weight:700;color:#6B7280;background:#F3F4F6;padding:2px 8px;border-radius:10px;flex-shrink:0}
-  .item-title{font-size:16px;font-weight:600;color:#111111;line-height:1.4}
-  .page-tag{font-size:11px;font-weight:600;color:#1D4ED8;background:#DBEAFE;padding:2px 8px;border-radius:8px;flex-shrink:0}
+  .item-header{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+  .item-number{font-size:11px;font-weight:700;color:#6B7280;background:#F3F4F6;padding:2px 7px;border-radius:10px}
+  .item-title{font-size:15px;font-weight:600;color:#111;line-height:1.4}
+  .page-tag{font-size:11px;font-weight:600;color:#1D4ED8;background:#DBEAFE;padding:2px 8px;border-radius:8px}
   .item-desc{font-size:14px;color:#374151;line-height:1.6;margin-bottom:10px}
-  .done-stamp{font-size:12px;color:#16A34A;font-weight:600;margin-bottom:8px;display:none}
-  .item.done .done-stamp{display:block}
-  .note-label{font-size:11px;font-weight:700;color:#9CA3AF;letter-spacing:0.5px;text-transform:uppercase;display:block;margin-bottom:4px}
-  .note-area{width:100%;background:#F9FAFB;border:1.5px solid #E5E7EB;border-radius:7px;color:#111111;font-size:14px;font-family:inherit;padding:9px 12px;resize:vertical;min-height:58px;transition:border-color 0.2s;line-height:1.5}
+  .done-stamp{font-size:11px;color:#16A34A;font-weight:600;margin-top:1px}
+  .note-label{font-size:10px;font-weight:700;color:#9CA3AF;letter-spacing:0.5px;text-transform:uppercase;display:block;margin-bottom:4px;margin-top:10px}
+  .note-area{width:100%;background:#F9FAFB;border:1.5px solid #E5E7EB;border-radius:7px;color:#111;font-size:13px;font-family:inherit;padding:8px 12px;resize:vertical;min-height:54px;transition:border-color 0.2s;line-height:1.5}
   .note-area:focus{outline:none;border-color:#2E86C1;background:#fff}
   .note-area::placeholder{color:#9CA3AF}
 
-  /* Delete button */
-  .delete-btn{position:absolute;top:14px;right:16px;width:28px;height:28px;border-radius:50%;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:all 0.2s;color:#EF4444}
+  .delete-btn{position:absolute;top:12px;right:14px;width:26px;height:26px;border-radius:50%;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:all 0.2s;color:#EF4444}
   .item:hover .delete-btn{opacity:1}
   .delete-btn:hover{background:#FEE2E2}
 
-  .all-done-banner{display:none;background:linear-gradient(135deg,#15803D,#16A34A);color:white;text-align:center;padding:20px;border-radius:12px;margin-bottom:28px;font-size:17px;font-weight:600}
-  .all-done-banner.show{display:block}
+  /* ── ARTICLE CARD ── */
+  .article-item{flex-direction:column;cursor:default}
+  .article-item:hover{background:white}
+  .sub-step{display:flex;align-items:center;gap:10px;padding:8px 12px;border:1.5px solid #E5E7EB;border-radius:8px;cursor:pointer;transition:all 0.15s;margin-bottom:6px}
+  .sub-step:hover{background:#F9FAFB}
+  .sub-step.done{background:#F0FDF4;border-color:#BBF7D0}
+  .sub-step-check{width:20px;height:20px;border-radius:6px;border:2px solid #D1D5DB;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s}
+  .sub-step.done .sub-step-check{background:#16A34A;border-color:#16A34A}
+  .sub-step-label{font-size:13px;color:#111;line-height:1.4}
+  .sub-step.done .sub-step-label{text-decoration:line-through;color:#6B7280}
+  .social-box{background:#F0FDF4;border:1.5px solid #BBF7D0;border-radius:8px;padding:12px 14px;margin-bottom:12px}
+  .social-label{font-size:11px;font-weight:700;color:#065F46;display:block;margin-bottom:5px}
+  .social-text{font-size:13px;color:#374151;line-height:1.6}
 
-  .summary-bar{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1.5px solid #E5E7EB;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 -4px 16px rgba(0,0,0,0.07);z-index:100}
-  .summary-left{font-size:15px;color:#374151;display:flex;align-items:center;gap:10px}
-  .summary-left strong{color:#1A5276;font-size:16px}
-  .reset-btn{font-size:13px;color:#6B7280;background:none;border:1.5px solid #E5E7EB;padding:7px 16px;border-radius:20px;cursor:pointer;transition:all 0.2s}
+  /* ── INFO BLOCK ── */
+  .info-block{background:#F5F3FF;border:1.5px solid #DDD6FE;border-radius:12px;padding:22px 26px}
+
+  /* ── JUMP BTN ── */
+  .jump-btn{display:inline-flex;align-items:center;gap:6px;background:#1A5276;color:white;border:none;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:16px;transition:background 0.2s}
+  .jump-btn:hover{background:#2E86C1}
+
+  /* ── BOTTOM BAR ── */
+  .bottom-bar{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1.5px solid #E5E7EB;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 -4px 16px rgba(0,0,0,0.07);z-index:100}
+  .bottom-left{font-size:14px;color:#374151}
+  .bottom-left strong{color:#1A5276;font-size:15px}
+  .reset-btn{font-size:12px;color:#6B7280;background:none;border:1.5px solid #E5E7EB;padding:7px 16px;border-radius:20px;cursor:pointer}
   .reset-btn:hover{border-color:#EF4444;color:#EF4444}
+
+  .all-done{display:none;background:linear-gradient(135deg,#15803D,#16A34A);color:white;text-align:center;padding:18px;border-radius:12px;font-size:16px;font-weight:600;margin-bottom:20px}
+  .all-done.show{display:block}
 </style>
 </head>
 <body>
 
+<!-- PIN -->
 <div id="pinScreen">
   <h2>🦷 Always Smile — ATG</h2>
   <p>Enter PIN to continue</p>
   <div class="pin-dots">
-    <div class="pin-dot" id="d0"></div>
-    <div class="pin-dot" id="d1"></div>
-    <div class="pin-dot" id="d2"></div>
-    <div class="pin-dot" id="d3"></div>
+    <div class="pin-dot" id="d0"></div><div class="pin-dot" id="d1"></div>
+    <div class="pin-dot" id="d2"></div><div class="pin-dot" id="d3"></div>
   </div>
   <div class="pin-grid">
     <button class="pin-btn" onclick="pinPress('1')">1</button>
@@ -122,29 +167,66 @@
   <div id="pinError">Incorrect PIN. Try again.</div>
 </div>
 
+<!-- APP -->
 <div id="app">
   <div class="header">
-    <div class="header-inner">
+    <div class="header-top">
       <h1>🦷 Always Smile Dental Care — ATG</h1>
-      <p>alwayssmiledentalcare.com · Website Fix & Publication Tracker</p>
-      <div class="sync-bar">
+      <div class="header-sub">
         <div class="sync-dot" id="syncDot"></div>
         <span class="sync-status" id="syncStatus">Loading...</span>
-        <span>·</span>
-        <span id="lastUpdated">--</span>
+        <span style="color:rgba(255,255,255,0.3)">·</span>
+        <span id="lastUpdated"></span>
       </div>
-      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div>
-      <div class="progress-label"><span>Overall Progress</span><strong id="progressText">0 complete</strong></div>
+    </div>
+    <div class="tabs" id="tabBar">
+      <button class="tab active" onclick="switchTab('dashboard')" id="tab-dashboard">
+        📊 Overview
+      </button>
+      <button class="tab" onclick="switchTab('website')" id="tab-website">
+        🌐 Website
+        <span class="tab-pill" id="pill-website">0/14</span>
+      </button>
+      <button class="tab" onclick="switchTab('seo')" id="tab-seo">
+        🔍 SEO
+        <span class="tab-pill" id="pill-seo">0/19</span>
+      </button>
+      <button class="tab" onclick="switchTab('content')" id="tab-content">
+        📅 Content
+        <span class="tab-pill" id="pill-content">0/0</span>
+      </button>
     </div>
   </div>
 
-  <div class="container">
-    <div class="all-done-banner" id="allDoneBanner">✅ All tasks complete — great work!</div>
-    <div id="taskList"></div>
+  <div class="content">
+
+    <!-- DASHBOARD TAB -->
+    <div class="tab-panel active" id="panel-dashboard">
+      <div class="all-done" id="allDoneBanner">✅ Everything complete — great work!</div>
+      <div class="dashboard-grid" id="dashGrid"></div>
+    </div>
+
+    <!-- WEBSITE TAB -->
+    <div class="tab-panel" id="panel-website">
+      <button class="jump-btn" onclick="jumpToNext('website')">⬇ Jump to next task</button>
+      <div id="render-website"></div>
+    </div>
+
+    <!-- SEO TAB -->
+    <div class="tab-panel" id="panel-seo">
+      <button class="jump-btn" onclick="jumpToNext('seo')">⬇ Jump to next task</button>
+      <div id="render-seo"></div>
+    </div>
+
+    <!-- CONTENT TAB -->
+    <div class="tab-panel" id="panel-content">
+      <div id="render-content"></div>
+    </div>
+
   </div>
 
-  <div class="summary-bar">
-    <div class="summary-left"><strong id="summaryText">0</strong> of <strong id="summaryTotal">0</strong> completed</div>
+  <div class="bottom-bar">
+    <div class="bottom-left"><strong id="totalDone">0</strong> of <strong id="totalAll">0</strong> tasks complete across all sections</div>
     <button class="reset-btn" onclick="resetAll()">Reset All</button>
   </div>
 </div>
@@ -153,10 +235,9 @@
   // ── CONFIG ──
   const BIN_ID = '6a3ca67eda38895dfefb0c07';
   const API_KEY = '$2a$10$4aH/RKWn7NmW7cwBiDm09OBT4bHwMecicfSywrrHQ1cjssRzCA1IO';
-  const STORAGE_KEY = 'asdc_checklist_v3';
-  const PIN_SESSION_KEY = 'asdc_pin_ok';
+  const STORAGE_KEY = 'asdc_checklist_v4';
+  const PIN_KEY = 'asdc_pin_ok';
 
-  // ── TASK DATA ──
   let TASKS = [
     // ── WEBSITE FIX TASKS ──
     { id:'t1', section:'🔴 Critical — Fix Before Op-Ed Goes Live', badge:'badge-red', title:'Fix all 5 FAQ answers on About Us page', tag:'About Us', desc:'Every FAQ shows the same wrong answer: "Yes, we accept most major dental insurance plans." Each needs its own correct answer: What services do you offer? How often should I visit? What can I expect on my first visit? Do you offer emergency care?' },
@@ -270,310 +351,343 @@
       steps:[`a8s1:Write article by May 20`,`a8s2:Publish on alwayssmiledentalcare.com/articles first`,`a8s3:Submit to New Brunswick Today Jun 1 — lead outlet`,`a8s4:Submit to Patch 48hrs later`,`a8s5:Submit to TAPinto 48hrs after Patch`,`a8s6:Post article link to Google Business Profile`,`a8s7:Anniversary social content — team photos, community thank-you, milestones`] },
   ];
 
-  let state = { checks: {}, notes: {}, taskOrder: null, lastUpdated: null };
+  // ── TAB CONFIG ──
+  const TAB_SECTIONS = {
+    website: new Set(['🔴 Critical — Fix Before Op-Ed Goes Live','🟡 Important — Fix Soon','🟢 Nice to Have — When Time Allows']),
+    seo: new Set(['⭐ Google Business Profile','📋 Directory Citations','🔗 Backlinks','🏗️ On-Page SEO','💬 Patient Reviews','🌏 Community & Cultural']),
+    content: new Set(['📋 Content Strategy','📅 Content Schedule — 2026–2027'])
+  };
+
+  const TAB_COLORS = {
+    website: '#1A5276', seo: '#92400E', content: '#5B21B6'
+  };
+  const TAB_BAR_COLORS = {
+    website: '#2E86C1', seo: '#D97706', content: '#7C3AED'
+  };
+
+  let state = { checks:{}, notes:{}, lastUpdated:null };
   let saveTimer = null;
   let pinEntry = '';
+  let activeTab = 'dashboard';
 
   // ── PIN ──
   async function pinSubmit() {
-    const hash = Array.from(new Uint8Array(
-      await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pinEntry))
-    )).map(b => b.toString(16).padStart(2,'0')).join('');
-    const correctHash = Array.from(new Uint8Array(
-      await crypto.subtle.digest('SHA-256', new TextEncoder().encode('0000'))
-    )).map(b => b.toString(16).padStart(2,'0')).join('');
-
-    if (hash === correctHash) {
-      localStorage.setItem(PIN_SESSION_KEY, '1');
-      document.getElementById('pinScreen').style.display = 'none';
-      document.getElementById('app').style.display = 'block';
+    const h = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pinEntry)))).map(b=>b.toString(16).padStart(2,'0')).join('');
+    const c = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode('0000')))).map(b=>b.toString(16).padStart(2,'0')).join('');
+    if (h === c) {
+      localStorage.setItem(PIN_KEY,'1');
+      document.getElementById('pinScreen').style.display='none';
+      document.getElementById('app').style.display='flex';
       loadFromCloud();
     } else {
       document.getElementById('pinError').classList.add('show');
-      document.querySelectorAll('.pin-dot').forEach(d => d.style.background = '#fca5a5');
-      setTimeout(() => {
-        pinEntry = ''; updateDots();
-        document.getElementById('pinError').classList.remove('show');
-        document.querySelectorAll('.pin-dot').forEach(d => d.style.background = '');
-      }, 800);
+      document.querySelectorAll('.pin-dot').forEach(d=>d.style.background='#fca5a5');
+      setTimeout(()=>{ pinEntry=''; updateDots(); document.getElementById('pinError').classList.remove('show'); document.querySelectorAll('.pin-dot').forEach(d=>d.style.background=''); }, 800);
     }
   }
-
-  function pinPress(d) { if (pinEntry.length >= 4) return; pinEntry += d; updateDots(); if (pinEntry.length === 4) setTimeout(pinSubmit, 150); }
-  function pinClear() { pinEntry = pinEntry.slice(0,-1); updateDots(); }
-  function updateDots() { for (let i=0;i<4;i++) document.getElementById('d'+i).classList.toggle('filled', i < pinEntry.length); }
+  function pinPress(d){ if(pinEntry.length>=4) return; pinEntry+=d; updateDots(); if(pinEntry.length===4) setTimeout(pinSubmit,150); }
+  function pinClear(){ pinEntry=pinEntry.slice(0,-1); updateDots(); }
+  function updateDots(){ for(let i=0;i<4;i++) document.getElementById('d'+i).classList.toggle('filled',i<pinEntry.length); }
 
   // ── SYNC ──
-  function setSyncStatus(msg, type) {
-    document.getElementById('syncStatus').textContent = msg;
-    document.getElementById('syncDot').className = 'sync-dot' + (type==='syncing'?' syncing':type==='error'?' error':'');
+  function setSyncStatus(msg,type){
+    document.getElementById('syncStatus').textContent=msg;
+    document.getElementById('syncDot').className='sync-dot'+(type==='syncing'?' syncing':type==='error'?' error':'');
+  }
+  function updateLastUpdated(ts){
+    if(!ts) return;
+    document.getElementById('lastUpdated').textContent='Updated: '+new Date(ts).toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',hour12:true})+' EST';
   }
 
-  function updateLastUpdated(ts) {
-    if (!ts) return;
-    const el = document.getElementById('lastUpdated');
-    if (!el) return;
-    el.textContent = 'Last updated: ' + new Date(ts).toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',hour12:true}) + ' EST';
-  }
-
-  // ── CLOUD ──
-  async function loadFromCloud() {
+  async function loadFromCloud(){
     setSyncStatus('Loading...','syncing');
     try {
       const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`,{headers:{'X-Master-Key':API_KEY}});
-      if (!res.ok) throw new Error();
+      if(!res.ok) throw new Error();
       const data = await res.json();
-      const d = (data.record||{}).asdc_checklist || {};
-      state.checks = d.checks || {};
-      state.notes = d.notes || {};
-      state.lastUpdated = d.lastUpdated || null;
-      // taskOrder ignored — tasks always come from code, never filtered by cloud state
+      const d = (data.record||{}).asdc_checklist||{};
+      state.checks = d.checks||{};
+      state.notes = d.notes||{};
+      state.lastUpdated = d.lastUpdated||null;
       updateLastUpdated(state.lastUpdated);
       setSyncStatus('Synced','ok');
     } catch {
-      setSyncStatus('Offline — changes save locally','error');
+      setSyncStatus('Offline','error');
       const local = localStorage.getItem(STORAGE_KEY);
-      if (local) try { const p=JSON.parse(local); state.checks=p.checks||{}; state.notes=p.notes||{}; state.lastUpdated=p.lastUpdated||null; } catch {}
+      if(local) try { const p=JSON.parse(local); state.checks=p.checks||{}; state.notes=p.notes||{}; state.lastUpdated=p.lastUpdated||null; } catch {}
     }
-    render();
+    renderAll();
   }
 
-  async function saveToCloud() {
+  async function saveToCloud(){
     setSyncStatus('Saving...','syncing');
     state.lastUpdated = new Date().toISOString();
-    state.taskOrder = TASKS.map(t=>t.id);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     updateLastUpdated(state.lastUpdated);
     try {
       const getRes = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`,{headers:{'X-Master-Key':API_KEY}});
       const cur = getRes.ok ? await getRes.json() : {record:{}};
-      const merged = Object.assign({}, cur.record||{}, {
-        asdc_checklist: { checks:state.checks, notes:state.notes, taskOrder:state.taskOrder, lastUpdated:state.lastUpdated }
-      });
-      const put = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{
-        method:'PUT', headers:{'Content-Type':'application/json','X-Master-Key':API_KEY}, body:JSON.stringify(merged)
-      });
-      if (!put.ok) throw new Error();
+      const merged = Object.assign({},cur.record||{},{asdc_checklist:{checks:state.checks,notes:state.notes,lastUpdated:state.lastUpdated}});
+      const put = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(merged)});
+      if(!put.ok) throw new Error();
       setSyncStatus('Saved ✓','ok');
-    } catch { setSyncStatus('Saved locally (cloud unavailable)','error'); }
+    } catch { setSyncStatus('Saved locally','error'); }
+  }
+  function queueSave(){ clearTimeout(saveTimer); saveTimer=setTimeout(saveToCloud,1200); }
+
+  // ── TABS ──
+  function switchTab(tab){
+    activeTab = tab;
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    document.getElementById('tab-'+tab).classList.add('active');
+    document.getElementById('panel-'+tab).classList.add('active');
   }
 
-  function queueSave() { clearTimeout(saveTimer); saveTimer = setTimeout(saveToCloud, 1200); }
-
-  // ── RENDER ──
-  // Section → group mapping
-  const WEBSITE_SECTIONS = new Set([
-    '🔴 Critical — Fix Before Op-Ed Goes Live',
-    '🟡 Important — Fix Soon',
-    '🟢 Nice to Have — When Time Allows'
-  ]);
-  const SEO_SECTIONS = new Set([
-    '⭐ Google Business Profile',
-    '📋 Directory Citations',
-    '🔗 Backlinks',
-    '🏗️ On-Page SEO',
-    '💬 Patient Reviews',
-    '🌏 Community & Cultural'
-  ]);
-  const CONTENT_SECTIONS = new Set([
-    '📋 Content Strategy',
-    '📅 Content Schedule — 2026–2027'
-  ]);
-
-  function render() {
-    const container = document.getElementById('taskList');
-    container.innerHTML = '';
-    let currentSection = '';
-    let currentGroup = '';
-    let card = null;
-    let globalNum = 0;
-
-    TASKS.forEach(task => {
-      // Determine which top-level group this task belongs to
-      const group = WEBSITE_SECTIONS.has(task.section) ? 'website' : SEO_SECTIONS.has(task.section) ? 'seo' : 'content';
-
-      // Inject group header when group changes
-      if (group !== currentGroup) {
-        currentGroup = group;
-        const groupDiv = document.createElement('div');
-        groupDiv.style.cssText = 'margin:32px 0 20px';
-        if (group === 'website') {
-          groupDiv.innerHTML = `<div style="display:flex;align-items:center;gap:12px"><div style="flex:1;height:2px;background:#E5E7EB"></div><span style="font-size:16px;font-weight:800;color:#111111;background:#F9FAFB;border:1.5px solid #E5E7EB;padding:8px 22px;border-radius:20px;white-space:nowrap">🌐 SECTION 1 — Website Updates</span><div style="flex:1;height:2px;background:#E5E7EB"></div></div>`;
-        } else if (group === 'seo') {
-          groupDiv.innerHTML = `<div style="display:flex;align-items:center;gap:12px"><div style="flex:1;height:2px;background:#E5E7EB"></div><span style="font-size:16px;font-weight:800;color:#111111;background:#F9FAFB;border:1.5px solid #E5E7EB;padding:8px 22px;border-radius:20px;white-space:nowrap">🔍 SECTION 3 — SEO Foundation</span><div style="flex:1;height:2px;background:#E5E7EB"></div></div>`;
-        } else {
-          groupDiv.innerHTML = `<div style="display:flex;align-items:center;gap:12px"><div style="flex:1;height:2px;background:#E5E7EB"></div><span style="font-size:16px;font-weight:800;color:#111111;background:#F9FAFB;border:1.5px solid #E5E7EB;padding:8px 22px;border-radius:20px;white-space:nowrap">📅 SECTION 2 — Content Schedule 2026–2027</span><div style="flex:1;height:2px;background:#E5E7EB"></div></div>`;
-        }
-        container.appendChild(groupDiv);
-        currentSection = ''; // reset so section header re-renders
+  function jumpToNext(tabId){
+    const sections = TAB_SECTIONS[tabId];
+    const tasks = TASKS.filter(t=>sections.has(t.section));
+    for(const task of tasks){
+      if(task.type==='article'){
+        const firstUndone = task.steps.find(s=>!state.checks[s.split(':')[0]]);
+        if(firstUndone){ const el=document.querySelector(`[data-stepid="${firstUndone.split(':')[0]}"]`); if(el){el.scrollIntoView({behavior:'smooth',block:'center'});return;} }
+      } else if(task.type!=='infoblock'){
+        if(!state.checks[task.id]){ const el=document.querySelector(`[data-id="${task.id}"]`); if(el){el.scrollIntoView({behavior:'smooth',block:'center'});return;} }
       }
+    }
+  }
 
-      if (task.section !== currentSection) {
-        currentSection = task.section;
-        const sec = document.createElement('div');
-        sec.className = 'section';
-        const hdr = document.createElement('div');
-        hdr.className = 'section-header';
-        hdr.innerHTML = `<span class="priority-badge ${task.badge}">${task.section}</span>`;
+  // ── PROGRESS HELPERS ──
+  function getTabProgress(tabId){
+    const sections = TAB_SECTIONS[tabId];
+    let total=0,done=0,nextTask=null;
+    TASKS.forEach(task=>{
+      if(!sections.has(task.section)) return;
+      if(task.type==='infoblock') return;
+      if(task.type==='article'){
+        task.steps.forEach(s=>{ const sid=s.split(':')[0]; total++; if(state.checks[sid]) done++; });
+        if(!nextTask && task.steps.some(s=>!state.checks[s.split(':')[0]])) nextTask=task.title;
+      } else {
+        total++; if(state.checks[task.id]) done++;
+        if(!nextTask && !state.checks[task.id]) nextTask=task.title;
+      }
+    });
+    return {total,done,nextTask};
+  }
+
+  function getTotalProgress(){
+    let total=0,done=0;
+    ['website','seo','content'].forEach(tab=>{ const p=getTabProgress(tab); total+=p.total; done+=p.done; });
+    return {total,done};
+  }
+
+  // ── RENDER ALL ──
+  function renderAll(){
+    renderDashboard();
+    renderTab('website');
+    renderTab('seo');
+    renderTab('content');
+    updateBottomBar();
+    updateTabPills();
+  }
+
+  function updateTabPills(){
+    ['website','seo','content'].forEach(tab=>{
+      const {total,done}=getTabProgress(tab);
+      const pill=document.getElementById('pill-'+tab);
+      if(!pill) return;
+      pill.textContent=done+'/'+total;
+      pill.className='tab-pill'+(done===total&&total>0?' complete':'');
+    });
+  }
+
+  function updateBottomBar(){
+    const {total,done}=getTotalProgress();
+    document.getElementById('totalDone').textContent=done;
+    document.getElementById('totalAll').textContent=total;
+    document.getElementById('allDoneBanner').classList.toggle('show',total>0&&done===total);
+  }
+
+  // ── DASHBOARD ──
+  function renderDashboard(){
+    const grid = document.getElementById('dashGrid');
+    grid.innerHTML='';
+    const tabs=[
+      {id:'website',icon:'🌐',label:'Website Updates'},
+      {id:'seo',icon:'🔍',label:'SEO Foundation'},
+      {id:'content',icon:'📅',label:'Content Schedule'}
+    ];
+    tabs.forEach(({id,icon,label})=>{
+      const {total,done,nextTask}=getTabProgress(id);
+      const pct=total?Math.round((done/total)*100):0;
+      const color=TAB_BAR_COLORS[id];
+      const card=document.createElement('div');
+      card.className='dash-card';
+      card.onclick=()=>switchTab(id);
+      card.innerHTML=`
+        <div class="dash-card-icon">${icon}</div>
+        <div class="dash-card-title">${label}</div>
+        <div class="dash-card-progress">${done} of ${total} complete (${pct}%)</div>
+        <div class="dash-bar-bg"><div class="dash-bar-fill" style="width:${pct}%;background:${color}"></div></div>
+        ${nextTask?`<div class="next-task"><div class="next-task-label">Next up</div>${nextTask}</div>`:'<div class="next-task" style="color:#16A34A;font-weight:600">✅ All done!</div>'}`;
+      grid.appendChild(card);
+    });
+  }
+
+  // ── RENDER TAB ──
+  function renderTab(tabId){
+    const container=document.getElementById('render-'+tabId);
+    container.innerHTML='';
+    const sections=TAB_SECTIONS[tabId];
+    let currentSection='';
+    let card=null;
+    let globalNum=0;
+
+    TASKS.forEach(task=>{
+      if(!sections.has(task.section)) return;
+
+      if(task.section!==currentSection){
+        currentSection=task.section;
+        const sec=document.createElement('div');
+        sec.className='section';
+        const hdr=document.createElement('div');
+        hdr.className='section-header';
+        hdr.innerHTML=`<span class="priority-badge ${task.badge}">${task.section}</span>`;
         sec.appendChild(hdr);
-        card = document.createElement('div');
-        card.className = 'card';
+        card=document.createElement('div');
+        card.className='card';
         sec.appendChild(card);
         container.appendChild(sec);
       }
+
+      if(task.type==='infoblock'){
+        const el=document.createElement('div');
+        el.className='info-block';
+        el.innerHTML=task.content;
+        card.appendChild(el);
+        return;
+      }
+
+      if(task.type==='article'){
+        globalNum++;
+        renderArticle(task,card,globalNum);
+        return;
+      }
+
+      // Standard task
       globalNum++;
-      const checked = !!state.checks[task.id];
-      const noteVal = state.notes[task.id] || '';
-
-      if (task.type === 'infoblock') {
-        // ── STYLED INFO BOX — no checkbox, just content ──
-        const item = document.createElement('div');
-        item.dataset.id = task.id;
-        item.style.cssText = 'background:#F5F3FF;border:1.5px solid #DDD6FE;border-radius:12px;padding:22px 26px;margin-bottom:0';
-        item.innerHTML = task.content;
-        card.appendChild(item);
-
-      } else if (task.type === 'article') {
-        // ── ARTICLE CARD with sub-checklist ──
-        const allDone = task.steps && task.steps.every(s => !!state.checks[s.split(':')[0]]);
-        const doneCount = task.steps ? task.steps.filter(s => !!state.checks[s.split(':')[0]]).length : 0;
-        const item = document.createElement('div');
-        item.className = 'item' + (allDone ? ' done' : '');
-        item.dataset.id = task.id;
-        item.style.cssText = 'flex-direction:column;cursor:default';
-        item.innerHTML = `
-          <div style="display:flex;align-items:flex-start;gap:16px;width:100%">
-            <div style="flex:1;min-width:0">
-              <div class="item-header" style="margin-bottom:8px">
-                <span class="item-number">Article ${task.num}</span>
-                <span style="font-size:12px;font-weight:700;color:#7C3AED;background:#EDE9FE;padding:2px 10px;border-radius:20px">${task.date}</span>
-                <span class="page-tag">${task.tag}</span>
-              </div>
-              <div class="item-title" style="margin-bottom:6px">${task.title}</div>
-              <div class="item-desc" style="margin-bottom:6px">${task.desc}</div>
-              <div style="font-size:12px;color:#6B7280;font-style:italic;margin-bottom:8px">${task.seo}</div>
-              ${task.social ? `<div style="background:#F0FDF4;border:1.5px solid #BBF7D0;border-radius:8px;padding:10px 14px;margin-bottom:12px"><span style="font-size:11px;font-weight:700;color:#065F46;display:block;margin-bottom:4px">📱 SOCIAL SUGGESTIONS</span><span style="font-size:13px;color:#374151">${task.social}</span></div>` : ''}
-              <div style="font-size:12px;font-weight:700;color:#374151;margin-bottom:8px">DEADLINE: <span style="color:#B91C1C">${task.deadline}</span> &nbsp;·&nbsp; ${doneCount} of ${task.steps.length} steps complete</div>
-              <div style="display:flex;flex-direction:column;gap:6px">
-                ${task.steps.map(s => {
-                  const [sid, ...lp] = s.split(':');
-                  const label = lp.join(':');
-                  const chk = !!state.checks[sid];
-                  return `<div onclick="toggleStep('${sid}')" style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:${chk?'#F0FDF4':'#F9FAFB'};border:1.5px solid ${chk?'#BBF7D0':'#E5E7EB'};border-radius:8px;cursor:pointer">
-                    <div style="width:20px;height:20px;border-radius:6px;border:2px solid ${chk?'#16A34A':'#D1D5DB'};background:${chk?'#16A34A':'white'};display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                      ${chk ? '<svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : ''}
-                    </div>
-                    <span style="font-size:13px;color:${chk?'#6B7280':'#111'};${chk?'text-decoration:line-through':''};line-height:1.4">${label}</span>
-                  </div>`;
-                }).join('')}
-              </div>
-              <span class="note-label" style="margin-top:12px">Notes</span>
-              <textarea class="note-area" placeholder="Add a note..." onclick="event.stopPropagation()" oninput="saveNote('${task.id}', this.value)">${noteVal}</textarea>
-            </div>
-            <button class="delete-btn" onclick="deleteTask('${task.id}')" title="Delete" style="flex-shrink:0;position:relative;top:0;right:0;opacity:0.5">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/></svg>
-            </button>
-          </div>`;
-        card.appendChild(item);
-
-      } else {
-        // ── STANDARD TASK ──
-        const item = document.createElement('div');
-        item.className = 'item' + (checked ? ' done' : '');
-        item.dataset.id = task.id;
-        item.style.cssText = checked ? 'padding:12px 20px' : '';
-      item.innerHTML = `
+      const checked=!!state.checks[task.id];
+      const noteVal=state.notes[task.id]||'';
+      const item=document.createElement('div');
+      item.className='item'+(checked?' done':'');
+      item.dataset.id=task.id;
+      item.innerHTML=`
         <div class="checkbox" onclick="toggleItem('${task.id}')">
           <svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <div class="item-body">
           <div class="item-header">
             <span class="item-number">${String(globalNum).padStart(2,'0')}</span>
-            <span class="item-title" style="${checked ? 'font-size:14px' : ''}">${task.title}</span>
-            ${!checked ? `<span class="page-tag">${task.tag}</span>` : ''}
+            <span class="item-title">${task.title}</span>
+            ${!checked?`<span class="page-tag">${task.tag}</span>`:''}
           </div>
-          ${!checked ? `
-          <div class="item-desc">${task.desc}</div>
-          <span class="note-label">Notes</span>
-          <textarea class="note-area" placeholder="Add a note..." onclick="event.stopPropagation()" oninput="saveNote('${task.id}', this.value)">${noteVal}</textarea>
-          ` : `<div class="done-stamp" style="display:block;margin-top:2px">✓ Completed</div>`}
+          ${!checked?`
+            <div class="item-desc">${task.desc}</div>
+            <span class="note-label">Notes</span>
+            <textarea class="note-area" placeholder="Add a note..." onclick="event.stopPropagation()" oninput="saveNote('${task.id}',this.value)">${noteVal}</textarea>
+          `:`<div class="done-stamp">✓ Completed</div>`}
         </div>
-        <button class="delete-btn" onclick="deleteTask('${task.id}')" title="Delete task">
+        <button class="delete-btn" onclick="deleteTask('${task.id}')" title="Delete">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/></svg>
         </button>`;
       card.appendChild(item);
-      } // end else standard task
     });
-
-    updateProgress();
   }
 
-  function toggleStep(sid) {
-    state.checks[sid] = !state.checks[sid];
-    render();
-    queueSave();
+  function renderArticle(task,card,num){
+    const noteVal=state.notes[task.id]||'';
+    const doneCount=task.steps.filter(s=>!!state.checks[s.split(':')[0]]).length;
+    const allDone=doneCount===task.steps.length;
+    const item=document.createElement('div');
+    item.className='item article-item'+(allDone?' done':'');
+    item.dataset.id=task.id;
+    item.innerHTML=`
+      <div style="width:100%">
+        <div class="item-header" style="margin-bottom:8px">
+          <span class="item-number">Article ${num}</span>
+          <span style="font-size:12px;font-weight:700;color:#7C3AED;background:#EDE9FE;padding:2px 10px;border-radius:20px">${task.date}</span>
+          <span class="page-tag">${task.tag}</span>
+          <span style="font-size:12px;color:#6B7280;margin-left:auto">${doneCount}/${task.steps.length} steps</span>
+        </div>
+        <div class="item-title" style="margin-bottom:6px">${task.title}</div>
+        <div class="item-desc" style="margin-bottom:6px">${task.desc}</div>
+        <div style="font-size:12px;color:#6B7280;font-style:italic;margin-bottom:8px">${task.seo}</div>
+        ${task.social?`<div class="social-box"><span class="social-label">📱 SOCIAL SUGGESTIONS</span><span class="social-text">${task.social}</span></div>`:''}
+        <div style="font-size:12px;font-weight:700;color:#374151;margin-bottom:10px">DEADLINE: <span style="color:#B91C1C">${task.deadline}</span></div>
+        <div>
+          ${task.steps.map(s=>{
+            const [sid,...lp]=s.split(':');
+            const label=lp.join(':');
+            const chk=!!state.checks[sid];
+            return `<div class="sub-step${chk?' done':''}" data-stepid="${sid}" onclick="toggleStep('${sid}')">
+              <div class="sub-step-check">
+                ${chk?'<svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>':''}
+              </div>
+              <span class="sub-step-label">${label}</span>
+            </div>`;
+          }).join('')}
+        </div>
+        <span class="note-label">Notes</span>
+        <textarea class="note-area" placeholder="Add a note..." onclick="event.stopPropagation()" oninput="saveNote('${task.id}',this.value)">${noteVal}</textarea>
+      </div>`;
+    card.appendChild(item);
   }
 
   // ── ACTIONS ──
-  function toggleItem(id) {
-    state.checks[id] = !state.checks[id];
-    render();
+  function toggleItem(id){
+    state.checks[id]=!state.checks[id];
+    renderAll();
     queueSave();
   }
 
-  function saveNote(id, val) {
-    state.notes[id] = val;
+  function toggleStep(sid){
+    state.checks[sid]=!state.checks[sid];
+    renderAll();
     queueSave();
   }
 
-  function deleteTask(id) {
-    const task = TASKS.find(t => t.id === id);
-    if (!confirm(`Delete task: "${task ? task.title : id}"?\n\nThis cannot be undone.`)) return;
-    TASKS = TASKS.filter(t => t.id !== id);
+  function saveNote(id,val){
+    state.notes[id]=val;
+    queueSave();
+  }
+
+  function deleteTask(id){
+    const task=TASKS.find(t=>t.id===id);
+    if(!confirm(`Delete: "${task?task.title:id}"?
+
+This cannot be undone.`)) return;
+    TASKS.splice(TASKS.indexOf(task),1);
     delete state.checks[id];
     delete state.notes[id];
-    render();
+    renderAll();
     queueSave();
   }
 
-  function updateProgress() {
-    let total = 0, done = 0;
-    TASKS.forEach(task => {
-      if (task.type === 'infoblock') return;
-      if (task.type === 'article') {
-        task.steps.forEach(s => {
-          const sid = s.split(':')[0];
-          total++;
-          if (state.checks[sid]) done++;
-        });
-      } else {
-        total++;
-        if (state.checks[task.id]) done++;
-      }
-    });
-    const pct = total ? Math.round((done/total)*100) : 0;
-    document.getElementById('progressFill').style.width = pct + '%';
-    document.getElementById('progressText').textContent = done + ' of ' + total + ' complete';
-    document.getElementById('summaryText').textContent = done;
-    document.getElementById('summaryTotal').textContent = total;
-    document.getElementById('allDoneBanner').classList.toggle('show', total > 0 && done === total);
-  }
-
-  async function resetAll() {
-    if (!confirm('Reset all checkboxes and notes for everyone? This cannot be undone.')) return;
-    state.checks = {}; state.notes = {};
-    render();
+  async function resetAll(){
+    if(!confirm('Reset ALL checkboxes and notes for everyone? Cannot be undone.')) return;
+    state.checks={}; state.notes={};
+    renderAll();
     await saveToCloud();
   }
 
   // ── INIT ──
-  window.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem(PIN_SESSION_KEY) === '1') {
-      document.getElementById('pinScreen').style.display = 'none';
-      document.getElementById('app').style.display = 'block';
+  window.addEventListener('DOMContentLoaded',()=>{
+    if(localStorage.getItem(PIN_KEY)==='1'){
+      document.getElementById('pinScreen').style.display='none';
+      document.getElementById('app').style.display='flex';
       loadFromCloud();
     }
-    setInterval(() => { if (localStorage.getItem(PIN_SESSION_KEY)==='1') loadFromCloud(); }, 30000);
+    setInterval(()=>{ if(localStorage.getItem(PIN_KEY)==='1') loadFromCloud(); },30000);
   });
 </script>
 </body>
