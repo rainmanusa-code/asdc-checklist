@@ -454,15 +454,16 @@
   }
 
   function jumpToNext(tabId){
-    const sections = TAB_SECTIONS[tabId];
-    const tasks = TASKS.filter(t=>sections.has(t.section));
-    for(const task of tasks){
-      if(task.type==='article'){
-        const firstUndone = task.steps.find(s=>!state.checks[s.split(':')[0]]);
-        if(firstUndone){ const el=document.querySelector(`[data-stepid="${firstUndone.split(':')[0]}"]`); if(el){el.scrollIntoView({behavior:'smooth',block:'center'});return;} }
-      } else if(task.type!=='infoblock'){
-        if(!state.checks[task.id]){ const el=document.querySelector(`[data-id="${task.id}"]`); if(el){el.scrollIntoView({behavior:'smooth',block:'center'});return;} }
-      }
+    const container = document.getElementById('render-'+tabId);
+    if (!container) return;
+    // Find first unchecked item element within this tab's render container
+    const items = container.querySelectorAll('.item:not(.done), .sub-step:not(.done)');
+    if (items.length > 0) {
+      items[0].scrollIntoView({behavior:'smooth', block:'center'});
+      // Flash it briefly to highlight
+      items[0].style.transition = 'background 0.2s';
+      items[0].style.background = '#EFF6FF';
+      setTimeout(() => { items[0].style.background = ''; }, 1000);
     }
   }
 
