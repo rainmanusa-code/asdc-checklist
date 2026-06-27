@@ -257,7 +257,7 @@
     )).map(b => b.toString(16).padStart(2,'0')).join('');
 
     if (hash === correctHash) {
-      sessionStorage.setItem(PIN_SESSION_KEY, '1');
+      localStorage.setItem(PIN_SESSION_KEY, '1');
       document.getElementById('pinScreen').style.display = 'none';
       document.getElementById('app').style.display = 'block';
       loadFromCloud();
@@ -308,7 +308,12 @@
     } catch {
       setSyncStatus('Offline — changes save locally','error');
       const local = localStorage.getItem(STORAGE_KEY);
-      if (local) try { const p=JSON.parse(local); state=Object.assign(state,p); if(state.taskOrder) TASKS=TASKS.filter(t=>state.taskOrder.includes(t.id)); } catch {}
+      if (local) try { const p=JSON.parse(local); state=Object.assign(state,p); if(state.taskOrder) {
+          // Reorder existing tasks to match saved order, but keep any NEW tasks not in saved order
+          const ordered = state.taskOrder.filter(id => TASKS.find(t=>t.id===id)).map(id=>TASKS.find(t=>t.id===id));
+          const newTasks = TASKS.filter(t=>!state.taskOrder.includes(t.id));
+          TASKS = [...ordered, ...newTasks];
+        } } catch {}
     }
     render();
   }
@@ -531,12 +536,12 @@
 
   // ── INIT ──
   window.addEventListener('DOMContentLoaded', () => {
-    if (sessionStorage.getItem(PIN_SESSION_KEY) === '1') {
+    if (localStorage.getItem(PIN_SESSION_KEY) === '1') {
       document.getElementById('pinScreen').style.display = 'none';
       document.getElementById('app').style.display = 'block';
       loadFromCloud();
     }
-    setInterval(() => { if (sessionStorage.getItem(PIN_SESSION_KEY)==='1') loadFromCloud(); }, 30000);
+    setInterval(() => { if (localStorage.getItem(PIN_SESSION_KEY)==='1') loadFromCloud(); }, 30000);
   });
 </script>
 </body>
