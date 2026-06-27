@@ -444,6 +444,7 @@
         const item = document.createElement('div');
         item.className = 'item' + (checked ? ' done' : '');
         item.dataset.id = task.id;
+        item.style.cssText = checked ? 'padding:12px 20px' : '';
       item.innerHTML = `
         <div class="checkbox" onclick="toggleItem('${task.id}')">
           <svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -451,13 +452,14 @@
         <div class="item-body">
           <div class="item-header">
             <span class="item-number">${String(globalNum).padStart(2,'0')}</span>
-            <span class="item-title">${task.title}</span>
-            <span class="page-tag">${task.tag}</span>
+            <span class="item-title" style="${checked ? 'font-size:14px' : ''}">${task.title}</span>
+            ${!checked ? `<span class="page-tag">${task.tag}</span>` : ''}
           </div>
+          ${!checked ? `
           <div class="item-desc">${task.desc}</div>
-          <div class="done-stamp">✓ Completed</div>
           <span class="note-label">Notes</span>
           <textarea class="note-area" placeholder="Add a note..." onclick="event.stopPropagation()" oninput="saveNote('${task.id}', this.value)">${noteVal}</textarea>
+          ` : `<div class="done-stamp" style="display:block;margin-top:2px">✓ Completed</div>`}
         </div>
         <button class="delete-btn" onclick="deleteTask('${task.id}')" title="Delete task">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/></svg>
