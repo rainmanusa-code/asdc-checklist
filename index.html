@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Always Smile Dental Care — Website Fix Checklist</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #F0F4F8; color: #1B2631; min-height: 100vh; }
+
+  .header { background: linear-gradient(135deg, #1A5276 0%, #2E86C1 100%); padding: 32px 24px 28px; color: white; }
+  .header-inner { max-width: 860px; margin: 0 auto; }
+  .header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; }
+  .header p { font-size: 13px; color: #AED6F1; margin-top: 4px; }
+  .progress-bar-wrap { background: rgba(255,255,255,0.15); border-radius: 20px; height: 8px; margin-top: 18px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: #58D68D; border-radius: 20px; transition: width 0.4s ease; width: 0%; }
+  .progress-label { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+  .progress-label span { font-size: 12px; color: #AED6F1; }
+  .progress-label strong { font-size: 14px; color: white; }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 28px 20px 80px; }
+  .section { margin-bottom: 28px; }
+  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .priority-badge { font-size: 11px; font-weight: 700; letter-spacing: 0.5px; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; flex-shrink: 0; }
+  .badge-red { background: #FDEBD7; color: #C0392B; }
+  .badge-amber { background: #FFF3CD; color: #856404; }
+  .badge-green { background: #D5F5E3; color: #1E8449; }
+  .card { background: white; border-radius: 10px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); overflow: hidden; }
+
+  .item { display: flex; align-items: flex-start; gap: 14px; padding: 16px 18px; border-bottom: 1px solid #F0F4F8; transition: background 0.15s; cursor: pointer; user-select: none; }
+  .item:last-child { border-bottom: none; }
+  .item:hover { background: #FAFBFC; }
+  .item.done { background: #F9FFF9; }
+  .item.done .item-title { text-decoration: line-through; color: #AAA; }
+  .item.done .item-desc { color: #BCC; }
+  .item.saving { pointer-events: none; opacity: 0.7; }
+
+  .checkbox { width: 22px; height: 22px; border-radius: 6px; border: 2px solid #D0D7DE; flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin-top: 1px; transition: all 0.2s; background: white; }
+  .item.done .checkbox { background: #27AE60; border-color: #27AE60; }
+  .checkbox svg { display: none; }
+  .item.done .checkbox svg { display: block; }
+
+  .item-body { flex: 1; }
+  .item-header { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .item-number { font-size: 11px; font-weight: 700; color: #999; background: #F0F4F8; padding: 1px 7px; border-radius: 10px; }
+  .item-title { font-size: 14px; font-weight: 600; color: #1B2631; }
+  .item-desc { font-size: 13px; color: #555; margin-top: 4px; line-height: 1.5; }
+  .page-tag { font-size: 10px; font-weight: 600; color: #2E86C1; background: #D6EAF8; padding: 1px 7px; border-radius: 8px; }
+  .done-stamp { font-size: 11px; color: #27AE60; font-weight: 600; margin-top: 4px; display: none; }
+  .item.done .done-stamp { display: block; }
+
+  .all-done-banner { display: none; background: linear-gradient(135deg, #1E8449, #27AE60); color: white; text-align: center; padding: 20px; border-radius: 10px; margin-bottom: 28px; font-size: 16px; font-weight: 600; }
+  .all-done-banner.show { display: block; }
+
+  .summary-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid #E8EDF2; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 -4px 16px rgba(0,0,0,0.08); z-index: 100; }
+  .summary-left { font-size: 13px; color: #555; display: flex; align-items: center; gap: 10px; }
+  .summary-left strong { color: #1A5276; }
+  .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: #ccc; flex-shrink: 0; transition: background 0.3s; }
+  .sync-dot.syncing { background: #F39C12; }
+  .sync-dot.ok { background: #27AE60; }
+  .sync-dot.err { background: #C0392B; }
+  .sync-label { font-size: 11px; color: #999; }
+  .reset-btn { font-size: 12px; color: #999; background: none; border: 1px solid #E0E0E0; padding: 6px 14px; border-radius: 20px; cursor: pointer; transition: all 0.2s; }
+  .reset-btn:hover { border-color: #C0392B; color: #C0392B; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <h1>🦷 Always Smile Dental Care — Website Fix Checklist</h1>
+    <p>alwayssmiledentalcare.com · Reviewed June 27, 2026 · 13 items</p>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div>
+    <div class="progress-label"><span>Progress</span><strong id="progressText">0 of 13 complete</strong></div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="all-done-banner" id="allDoneBanner">✅ All items complete — the website is ready!</div>
+
+  <div class="section">
+    <div class="section-header"><span class="priority-badge badge-red">🔴 Critical — Fix Before Op-Ed Goes Live</span></div>
+    <div class="card">
+      <div class="item" onclick="toggle(this)" id="item1">
+        <div class="checkbox"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-body">
+          <div class="item-header"><span class="item-number">01</span><span class="item-title">Fix all 5 FAQ answers on About Us page</span><span class="page-tag">About Us</span></div>
+          <div class="item-desc">Every FAQ shows the same wrong answer: "Yes, we accept most major dental insurance plans." Questions include: What services do you offer? How often should I visit? What can I expect on my first visit? Do you offer emergency care? Each needs its own correct answer.</div>
+          <div class="done-stamp">✓ Completed</div>
+        </div>
+      </div>
+      <div class="item" onclick="toggle(this)" id="item2">
+        <div class="checkbox"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-body">
+          <div class="item-header"><span class="item-number">02</span><span class="item-title">Add NJ Medicaid / NJ FamilyCare to the insurance section</span><span class="page-tag">Homepage</span></div>
+          <div class="item-desc">The insurance logos section shows Aetna, Blue Cross, Cigna, Delta, Guardian, Humana, and MetLife — but NJ Medicaid is not listed. The op-ed explicitly states the practice accepts NJ Medicaid. Any reader visiting the site after the article will not find confirmation. Add NJ FamilyCare logo or text before the article goes live.</div>
+          <div class="done-stamp">✓ Completed</div>
+        </div>
+      </div>
+      <div class="item" onclick="toggle(this)" id="item3">
+        <div class="checkbox"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-body">
+          <div class="item-header"><span class="item-number">03</span><span class="item-title">Fix New Patient Special price — $109 vs $129 vs $129.99</span><span class="page-tag">Homepage</span></div>
+          <div class="item-desc">Three different prices appear for the same offer: hero section shows $109, pricing cards show $129, and the booking form shows $129.99. Pick one price and apply it consistently across every page, section, and form.</div>
+          <div class="done-stamp">✓ Completed</div>
+        </div>
+      </div>
+      <div class="item" onclick="toggle(this)" id="item4">
+        <div class="checkbox"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-body">
+          <div class="item-header"><span class="item-number">04</span><span class="item-title">Publish the op-ed under the Articles section</span><span class="page-tag">Articles</span></div>
+          <div class="item-desc">The op-ed "Your Neighbors Have Dental Insurance — And Still Can't Find a Dentist" must be published on alwayssmiledentalcare.com/articles/ BEFORE submitting to any newspaper. This establishes the canonical URL and gives newspapers a live link to reference.</div>
+          <div class="done-stamp">✓ Completed</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="priority-badge badge-amber">🟡 Important — Fix Soon</span></div>
+    <div class="card">
+      <div class="item" onclick="toggle(this)" id="item5">
+        <div class="checkbox"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-body">
+          <div class="item-header"><span class="item-number">05</span><span class="item-title">Add NYU College of Dentistry credential to Dr. Farida's bio</span><span class="page-tag">Homepage · About Us</span></div>
+          <div class="item-desc">The bio mentions "over 10 years of experience" but never mentions NYU. A reviewer specifically wrote: "I came across a Dr. who had graduated from NYU, and I knew that I will not be wrong." Add: "Dr. Fanuswala earned her DDS from NYU College of Dentistry, one of the nation's leading dental schools."</div>
+          <div class="done-stamp">✓ Completed</div>
+        </div>
+      </div>
+      <div class="item" onclick="toggle(this)" id="item6">
+        <div class="checkbox"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-body">
+          <div class="item-header"><span class="item-number">06</span><span class="item-title">Ensure Negative Review is not seen on Website</span><span class="page-tag">Homepage · About Us</span></div>
+          <div class="item-desc">The detailed 1-star review from "S A" is currently visible in the testimonials section on both the homepage and About Us page. Review the Trustindex / Google Reviews widget settings to filter or exclude reviews below a certain star rating. The review will still exist on Google — but should not appear on your own website pages.</div>
+          <div class="done-stamp">✓ Completed</div>
+        </div>
+      </div>
+      <div class="item" onclick="toggle(this)" id="item7">
+        <div class="checkbox"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-body">
+          <div class="item-header"><span class="item-number">07</span><span class="item-title">Remove "dental practices throughout the world" from About Us</span><span class="page-tag">About Us</span></div>
+          <div class="item-desc">The About Us intro includes leftover template copy: "With dental practices throughout the world." Always Smile Dental Care is one practice in North Brunswick, NJ. Remove or replace this sentence entirely.</div>
+          <div class="done-stamp">✓ Completed</div>
+        </div>
+      </div>
+      <div class="item" onclick="toggle(this)" id="item8">
+        <div class="checkbox"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-body">
+          <div class="item-header"><span class="item-number">08</span><span class="item-title">Fix "Franklin Towship" typo in footer</span><span class="page-tag">All Pages — Footer</span></div>
+          <div class="item-desc">The footer lists "Franklin Towship" — missing the 'n'. Should read "Franklin Township." Appears in both the community links list and footer neighborhood section on all pages.</div>
+          <div class="done-stamp">✓ Completed</div>
+        </div>
+      </div>
+      <div class="item" onclick="toggle(this)" id="item9">
+        <div class="checkbox"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-body">
+          <div class="item-header"><span class="item-number">09</span><span class="item-title">Fix Wednesday missing from appointment booking form</span><span class="page-tag">Homepage · Booking Form</span></div>
+          <div class="item-desc">Opening hours show Tuesday, Wednesday, Friday, Saturday. The booking form only shows Tuesday, Friday, Saturday — Wednesday is missing. Either add Wednesday to the form or remove it from the hours display.</div>
+          <div class="done-stamp">✓ Completed</div>
+        </div>
+      </div>
+      <div class="item" onclick="toggle(this)" id="item10">
+        <div class="checkbox"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-body">
+          <div class="item-header"><span class="item-number">10</span><span class="item-title">Fix "Guranteed" typo on pricing card</span><span class="page-tag">Homepage</span></div>
+          <div class="item-desc">The Free Second Opinion pricing card reads "Guranteed discount." Fix the spelling to "Guaranteed" in both the card headline and the bullet point below it.</div>
+          <div class="done-stamp">✓ Completed</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="priority-badge badge-green">🟢 Nice to Have — When Time Allows</span></div>
+    <div class="card">
+      <div class="item" onclick="toggle(this)" id="item11">
+        <div class="checkbox"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-body">
+          <div class="item-header"><span class="item-number">11</span><span class="item-title">Update "hundreds of families" to reflect true scale</span><span class="page-tag">Homepage · About Us</span></div>
+          <div class="item-desc">Dr. Farida's bio says "hundreds of families." With 143 Google reviews and a fully booked schedule, the practice has seen thousands of patients. Update to "thousands of patients" or a specific number from your practice management system.</div>
+          <div class="done-stamp">✓ Completed</div>
+        </div>
+      </div>
+      <div class="item" onclick="toggle(this)" id="item12">
+        <div class="checkbox"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-body">
+          <div class="item-header"><span class="item-number">12</span><span class="item-title">Update hours when GP associate is hired and new days open</span><span class="page-tag">Homepage · All Pages</span></div>
+          <div class="item-desc">Once a GP associate is hired and the practice expands to 5 days, update hours on the homepage, contact page, Google Business Profile, and all directory listings simultaneously. Inconsistent hours across platforms is a common SEO problem.</div>
+          <div class="done-stamp">✓ Completed</div>
+        </div>
+      </div>
+      <div class="item" onclick="toggle(this)" id="item13">
+        <div class="checkbox"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-body">
+          <div class="item-header"><span class="item-number">13</span><span class="item-title">Personalize the About Us mission and vision text</span><span class="page-tag">About Us</span></div>
+          <div class="item-desc">Current mission and vision statements are generic template language. Rewrite to reflect the practice's actual values — accessible care for all insurance types, serving the diverse Middlesex County community, dental care for all ages — using the same voice as the op-ed.</div>
+          <div class="done-stamp">✓ Completed</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="summary-bar">
+  <div class="summary-left">
+    <div class="sync-dot" id="syncDot"></div>
+    <strong id="summaryText">0 of 13</strong> items completed
+    <span class="sync-label" id="syncLabel">Loading...</span>
+  </div>
+  <button class="reset-btn" onclick="resetAll()">Reset All</button>
+</div>
+
+<script>
+  const API_KEY = '$2a$10$4aH/RKWn7NmW7cwBiDm09OBT4bHwMecicfSywrrHQ1cjssRzCA1IO';
+  const BIN_ID = '6a3ca67eda38895dfefb0c07'; // shared with FTG, checklist uses 'asdc_' prefixed keys
+  const TOTAL = 13;
+  let state = {};
+
+  function setSync(status, label) {
+    document.getElementById('syncDot').className = 'sync-dot ' + status;
+    document.getElementById('syncLabel').textContent = label;
+  }
+
+  async function load() {
+    setSync('syncing', 'Loading...');
+    try {
+      const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+        headers: { 'X-Master-Key': API_KEY }
+      });
+      const data = await res.json();
+      state = (data.record && data.record.asdc_checklist) || {};
+      setSync('ok', 'Up to date');
+    } catch(e) {
+      setSync('err', 'Load failed');
+      state = {};
+    }
+    apply();
+  }
+
+  async function save() {
+    setSync('syncing', 'Saving...');
+    try {
+      await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+        body: JSON.stringify(Object.assign({}, await (await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {headers:{'X-Master-Key':API_KEY}})).json().then(d=>d.record||{}), {asdc_checklist: state}))
+      });
+      setSync('ok', 'Saved ✓');
+    } catch(e) {
+      setSync('err', 'Save failed');
+    }
+  }
+
+  function updateProgress() {
+    const done = Object.values(state).filter(Boolean).length;
+    const pct = Math.round((done / TOTAL) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressText').textContent = done + ' of ' + TOTAL + ' complete';
+    document.getElementById('summaryText').textContent = done + ' of ' + TOTAL;
+    document.getElementById('allDoneBanner').classList.toggle('show', done === TOTAL);
+  }
+
+  function apply() {
+    document.querySelectorAll('.item').forEach(el => {
+      el.classList.toggle('done', !!state[el.id]);
+    });
+    updateProgress();
+  }
+
+  async function toggle(el) {
+    if (el.classList.contains('saving')) return;
+    el.classList.add('saving');
+    state[el.id] = !state[el.id];
+    apply();
+    await save();
+    el.classList.remove('saving');
+  }
+
+  async function resetAll() {
+    if (!confirm('Reset all checkboxes for everyone? This cannot be undone.')) return;
+    state = {};
+    apply();
+    await save();
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    load();
+    setInterval(load, 30000);
+  });
+</script>
+</body>
+</html>
