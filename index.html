@@ -6,18 +6,18 @@
 <title>Always Smile Dental Care — Website Fix Checklist</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f1117;color:#e8eaf0;min-height:100vh}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#F0F4F8;color:#1B2631;min-height:100vh}
 
   /* ── PIN SCREEN ── */
-  #pinScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;background:linear-gradient(135deg,#0f1117 0%,#1a2235 100%)}
+  #pinScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;background:linear-gradient(135deg,#1A5276 0%,#2E86C1 100%)}
   #pinScreen h2{font-size:22px;font-weight:700;color:#fff;margin-bottom:8px}
-  #pinScreen p{font-size:14px;color:#6b7280;margin-bottom:32px}
+  #pinScreen p{font-size:14px;color:#AED6F1;margin-bottom:32px}
   .pin-dots{display:flex;gap:14px;margin-bottom:28px}
-  .pin-dot{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.2);transition:all 0.15s}
-  .pin-dot.filled{background:#2E86C1;border-color:#2E86C1}
+  .pin-dot{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);transition:all 0.15s}
+  .pin-dot.filled{background:white;border-color:white}
   .pin-grid{display:grid;grid-template-columns:repeat(3,72px);gap:12px}
-  .pin-btn{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:white;font-size:22px;font-weight:500;cursor:pointer;transition:all 0.15s}
-  .pin-btn:hover{background:rgba(255,255,255,0.12)}
+  .pin-btn{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;font-size:22px;font-weight:500;cursor:pointer;transition:all 0.15s}
+  .pin-btn:hover{background:rgba(255,255,255,0.25)}
   .pin-btn:active{transform:scale(0.93)}
   #pinError{color:#ef4444;font-size:13px;margin-top:16px;display:none}
   #pinError.show{display:block}
@@ -44,48 +44,48 @@
   .progress-label span{font-size:12px;color:#AED6F1}
   .progress-label strong{font-size:14px;color:white}
 
-  .container{max-width:860px;margin:0 auto;padding:28px 20px 80px;background:#0f1117}
+  .container{max-width:860px;margin:0 auto;padding:28px 20px 80px;background:#F0F4F8}
   .section{margin-bottom:28px}
   .section-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
   .priority-badge{font-size:11px;font-weight:700;letter-spacing:0.5px;padding:3px 10px;border-radius:20px;text-transform:uppercase;flex-shrink:0}
-  .badge-red{background:#3b1a1a;color:#f87171}
-  .badge-amber{background:#2d2410;color:#fbbf24}
-  .badge-green{background:#0f2a1a;color:#4ade80}
+  .badge-red{background:#FDEBD7;color:#C0392B}
+  .badge-amber{background:#FFF3CD;color:#856404}
+  .badge-green{background:#D5F5E3;color:#1E8449}
 
-  .card{background:#161b2e;border:1px solid #252d47;border-radius:10px;overflow:hidden}
-  .item{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;border-bottom:1px solid #1e2540;transition:background 0.15s;cursor:pointer;user-select:none}
+  .card{background:white;border:1px solid #E2E8F0;border-radius:10px;overflow:hidden}
+  .item{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;border-bottom:1px solid #F0F4F8;transition:background 0.15s;cursor:pointer;user-select:none}
   .item:last-child{border-bottom:none}
-  .item:hover{background:#1c2340}
-  .item.done{background:#0d1f14}
-  .item.done .item-title{text-decoration:line-through;color:#4a5568}
-  .item.done .item-desc{color:#374151}
+  .item:hover{background:#F8FAFC}
+  .item.done{background:#F0FFF4}
+  .item.done .item-title{text-decoration:line-through;color:#A0AEC0}
+  .item.done .item-desc{color:#CBD5E0}
   .item.saving{pointer-events:none;opacity:0.6}
 
-  .checkbox{width:22px;height:22px;border-radius:6px;border:2px solid #374151;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all 0.2s;background:transparent}
+  .checkbox{width:22px;height:22px;border-radius:6px;border:2px solid #CBD5E0;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all 0.2s;background:transparent}
   .item.done .checkbox{background:#27AE60;border-color:#27AE60}
   .checkbox svg{display:none}
   .item.done .checkbox svg{display:block}
 
   .item-body{flex:1}
   .item-header{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-  .item-number{font-size:11px;font-weight:700;color:#4b5563;background:#1e2540;padding:1px 7px;border-radius:10px}
-  .item-title{font-size:14px;font-weight:600;color:#e8eaf0}
-  .item-desc{font-size:13px;color:#6b7280;margin-top:4px;line-height:1.5}
-  .page-tag{font-size:10px;font-weight:600;color:#60a5fa;background:#1e3a5f;padding:1px 7px;border-radius:8px}
+  .item-number{font-size:11px;font-weight:700;color:#6B7280;background:#F0F4F8;padding:1px 7px;border-radius:10px}
+  .item-title{font-size:14px;font-weight:600;color:#1B2631}
+  .item-desc{font-size:13px;color:#555;margin-top:4px;line-height:1.5}
+  .page-tag{font-size:10px;font-weight:600;color:#2E86C1;background:#D6EAF8;padding:1px 7px;border-radius:8px}
   .done-stamp{font-size:11px;color:#4ade80;font-weight:600;margin-top:4px;display:none}
   .item.done .done-stamp{display:block}
-  .note-area{margin-top:10px;width:100%;background:#0f1117;border:1px solid #2d3748;border-radius:6px;color:#9ca3af;font-size:12px;font-family:inherit;padding:8px 10px;resize:vertical;min-height:54px;transition:border-color 0.2s;line-height:1.5}
-  .note-area:focus{outline:none;border-color:#2E86C1;color:#e8eaf0}
-  .note-area::placeholder{color:#4b5563}
-  .note-label{font-size:10px;font-weight:600;color:#4b5563;letter-spacing:0.5px;margin-top:10px;text-transform:uppercase;display:block}
+  .note-area{margin-top:10px;width:100%;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:6px;color:#555;font-size:12px;font-family:inherit;padding:8px 10px;resize:vertical;min-height:54px;transition:border-color 0.2s;line-height:1.5}
+  .note-area:focus{outline:none;border-color:#2E86C1;color:#1B2631}
+  .note-area::placeholder{color:#A0AEC0}
+  .note-label{font-size:10px;font-weight:600;color:#A0AEC0;letter-spacing:0.5px;margin-top:10px;text-transform:uppercase;display:block}
 
-  .all-done-banner{display:none;background:linear-gradient(135deg,#14532d,#166534);color:white;text-align:center;padding:20px;border-radius:10px;margin-bottom:28px;font-size:16px;font-weight:600;border:1px solid #15803d}
+  .all-done-banner{display:none;background:linear-gradient(135deg,#1E8449,#27AE60);color:white;text-align:center;padding:20px;border-radius:10px;margin-bottom:28px;font-size:16px;font-weight:600}
   .all-done-banner.show{display:block}
 
-  .summary-bar{position:fixed;bottom:0;left:0;right:0;background:#161b2e;border-top:1px solid #252d47;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 -4px 16px rgba(0,0,0,0.3);z-index:100}
-  .summary-left{font-size:13px;color:#6b7280;display:flex;align-items:center;gap:10px}
-  .summary-left strong{color:#60a5fa}
-  .reset-btn{font-size:12px;color:#4b5563;background:none;border:1px solid #374151;padding:6px 14px;border-radius:20px;cursor:pointer;transition:all 0.2s}
+  .summary-bar{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #E2E8F0;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 -4px 16px rgba(0,0,0,0.08);z-index:100}
+  .summary-left{font-size:13px;color:#555;display:flex;align-items:center;gap:10px}
+  .summary-left strong{color:#1A5276}
+  .reset-btn{font-size:12px;color:#999;background:none;border:1px solid #E0E0E0;padding:6px 14px;border-radius:20px;cursor:pointer;transition:all 0.2s}
   .reset-btn:hover{border-color:#ef4444;color:#ef4444}
 </style>
 </head>
