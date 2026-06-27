@@ -172,24 +172,9 @@
     { id:'t12', section:'🟢 Nice to Have — When Time Allows', badge:'badge-green', title:'Update hours when GP associate is hired and new days open', tag:'Homepage · All Pages', desc:'Once a GP associate is hired and the practice expands, update hours on the homepage, contact page, Google Business Profile, and all directory listings simultaneously.' },
     { id:'t13', section:'🟢 Nice to Have — When Time Allows', badge:'badge-green', title:'Personalize the About Us mission and vision text', tag:'About Us', desc:'Current mission and vision are generic template language. Rewrite to reflect the practice values — accessible care for all insurance types, serving the diverse Middlesex County community, dental care for all ages.' },
 
-    // ── CONTENT STRATEGY ──
-    { id:'strategy', section:'📋 Content Strategy', badge:'badge-purple', type:'info',
-      title:'The Strategy',
-      desc:`One op-ed or community article every 6–8 weeks, always tied to a real calendar hook, always written in Dr. Farida's voice, always submitted to the website first then to local press. Each article builds a permanent backlink, a local press citation, and brand authority in the North Brunswick community. The cumulative effect of 8–10 articles over 12 months is meaningful local SEO momentum that paid ads cannot replicate.` },
-    { id:'rule1', section:'📋 Content Strategy', badge:'badge-purple', type:'rule', num:'1',
-      title:`Always publish on alwayssmiledentalcare.com/articles first — then submit to newspapers. Never the other way around.` },
-    { id:'rule2', section:'📋 Content Strategy', badge:'badge-purple', type:'rule', num:'2',
-      title:`Every article must read like community journalism, not advertising. Practice name appears only in the author bio at the bottom.` },
-    { id:'rule3', section:'📋 Content Strategy', badge:'badge-purple', type:'rule', num:'3',
-      title:`Submit to Patch first (self-serve, fastest). Then TAPinto by email. Then New Brunswick Today by email. Stagger by 48 hours.` },
-    { id:'rule4', section:'📋 Content Strategy', badge:'badge-purple', type:'rule', num:'4',
-      title:`Once published anywhere, add a Google Business Profile post with the article link within 24 hours.` },
-    { id:'rule5', section:'📋 Content Strategy', badge:'badge-purple', type:'rule', num:'5',
-      title:`Share on Facebook and Instagram the same day as publication. Keep captions short — let the article do the work.` },
-    { id:'rule6', section:'📋 Content Strategy', badge:'badge-purple', type:'rule', num:'6',
-      title:`Every article should include "North Brunswick" at least twice and "alwayssmiledentalcare.com" in the author bio — these are your primary local SEO signals.` },
-    { id:'rule7', section:'📋 Content Strategy', badge:'badge-purple', type:'rule', num:'7',
-      title:`Never submit the same article to two outlets simultaneously — stagger by 48 hours. Exception: the February article is big enough for all three outlets at once.` },
+    // ── CONTENT STRATEGY — single info block ──
+    { id:'strategy', section:'📋 Content Strategy', badge:'badge-purple', type:'infoblock',
+      content:`<div style="margin-bottom:14px"><span style="font-size:12px;font-weight:700;color:#7C3AED;text-transform:uppercase;letter-spacing:0.5px">The Strategy in One Sentence</span><p style="font-size:14px;color:#374151;line-height:1.7;margin-top:6px">One op-ed or community article every 6–8 weeks, always tied to a real calendar hook, always written in Dr. Farida's voice, always submitted to the website first then to local press. Each article builds a permanent backlink, a local press citation, and brand authority in the North Brunswick community. The cumulative effect of 8–10 articles over 12 months is meaningful local SEO momentum that paid ads cannot replicate.</p></div><div><span style="font-size:12px;font-weight:700;color:#7C3AED;text-transform:uppercase;letter-spacing:0.5px">Publication Rules — Follow Every Time</span><ol style="margin-top:10px;padding-left:20px;display:flex;flex-direction:column;gap:8px"><li style="font-size:14px;color:#374151;line-height:1.6">Always publish on alwayssmiledentalcare.com/articles first — then submit to newspapers. Never the other way around.</li><li style="font-size:14px;color:#374151;line-height:1.6">Every article must read like community journalism, not advertising. Practice name appears only in the author bio at the bottom.</li><li style="font-size:14px;color:#374151;line-height:1.6">Submit to Patch first (self-serve, fastest). Then TAPinto by email. Then New Brunswick Today by email. Stagger by 48 hours.</li><li style="font-size:14px;color:#374151;line-height:1.6">Once published anywhere, add a Google Business Profile post with the article link within 24 hours.</li><li style="font-size:14px;color:#374151;line-height:1.6">Share on Facebook and Instagram the same day as publication. Keep captions short — let the article do the work.</li><li style="font-size:14px;color:#374151;line-height:1.6">Every article should include "North Brunswick" at least twice and "alwayssmiledentalcare.com" in the author bio — these are your primary local SEO signals.</li><li style="font-size:14px;color:#374151;line-height:1.6">Never submit the same article to two outlets simultaneously — stagger by 48 hours. Exception: the February article is big enough for all three outlets at once.</li></ol></div>` },
 
     // ── CONTENT SCHEDULE ──
     { id:'a1', section:'📅 Content Schedule — 2026–2027', badge:'badge-blue', type:'article',
@@ -375,9 +360,62 @@
       const checked = !!state.checks[task.id];
       const noteVal = state.notes[task.id] || '';
 
-      const item = document.createElement('div');
-      item.className = 'item' + (checked ? ' done' : '');
-      item.dataset.id = task.id;
+      if (task.type === 'infoblock') {
+        // ── STYLED INFO BOX — no checkbox, just content ──
+        const item = document.createElement('div');
+        item.dataset.id = task.id;
+        item.style.cssText = 'background:#F5F3FF;border:1.5px solid #DDD6FE;border-radius:12px;padding:22px 26px;margin-bottom:0';
+        item.innerHTML = task.content;
+        card.appendChild(item);
+
+      } else if (task.type === 'article') {
+        // ── ARTICLE CARD with sub-checklist ──
+        const allDone = task.steps && task.steps.every(s => !!state.checks[s.split(':')[0]]);
+        const doneCount = task.steps ? task.steps.filter(s => !!state.checks[s.split(':')[0]]).length : 0;
+        const item = document.createElement('div');
+        item.className = 'item' + (allDone ? ' done' : '');
+        item.dataset.id = task.id;
+        item.style.cssText = 'flex-direction:column;cursor:default';
+        item.innerHTML = `
+          <div style="display:flex;align-items:flex-start;gap:16px;width:100%">
+            <div style="flex:1;min-width:0">
+              <div class="item-header" style="margin-bottom:8px">
+                <span class="item-number">Article ${task.num}</span>
+                <span style="font-size:12px;font-weight:700;color:#7C3AED;background:#EDE9FE;padding:2px 10px;border-radius:20px">${task.date}</span>
+                <span class="page-tag">${task.tag}</span>
+              </div>
+              <div class="item-title" style="margin-bottom:6px">${task.title}</div>
+              <div class="item-desc" style="margin-bottom:6px">${task.desc}</div>
+              <div style="font-size:12px;color:#6B7280;font-style:italic;margin-bottom:8px">${task.seo}</div>
+              ${task.social ? `<div style="background:#F0FDF4;border:1.5px solid #BBF7D0;border-radius:8px;padding:10px 14px;margin-bottom:12px"><span style="font-size:11px;font-weight:700;color:#065F46;display:block;margin-bottom:4px">📱 SOCIAL</span><span style="font-size:13px;color:#374151">${task.social}</span></div>` : ''}
+              <div style="font-size:12px;font-weight:700;color:#374151;margin-bottom:8px">DEADLINE: <span style="color:#B91C1C">${task.deadline}</span> &nbsp;·&nbsp; ${doneCount} of ${task.steps.length} steps complete</div>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                ${task.steps.map(s => {
+                  const [sid, ...lp] = s.split(':');
+                  const label = lp.join(':');
+                  const chk = !!state.checks[sid];
+                  return `<div onclick="toggleStep('${sid}')" style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:${chk?'#F0FDF4':'#F9FAFB'};border:1.5px solid ${chk?'#BBF7D0':'#E5E7EB'};border-radius:8px;cursor:pointer">
+                    <div style="width:20px;height:20px;border-radius:6px;border:2px solid ${chk?'#16A34A':'#D1D5DB'};background:${chk?'#16A34A':'white'};display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                      ${chk ? '<svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : ''}
+                    </div>
+                    <span style="font-size:13px;color:${chk?'#6B7280':'#111'};${chk?'text-decoration:line-through':''};line-height:1.4">${label}</span>
+                  </div>`;
+                }).join('')}
+              </div>
+              <span class="note-label" style="margin-top:12px">Notes</span>
+              <textarea class="note-area" placeholder="Add a note..." onclick="event.stopPropagation()" oninput="saveNote('${task.id}', this.value)">${noteVal}</textarea>
+            </div>
+            <button class="delete-btn" onclick="deleteTask('${task.id}')" title="Delete" style="flex-shrink:0;position:relative;top:0;right:0;opacity:0.5">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+          </div>`;
+        card.appendChild(item);
+
+      } else {
+        // ── STANDARD TASK ──
+        const item = document.createElement('div');
+        item.className = 'item' + (checked ? ' done' : '');
+        item.dataset.id = task.id;
       item.innerHTML = `
         <div class="checkbox" onclick="toggleItem('${task.id}')">
           <svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -397,9 +435,16 @@
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/></svg>
         </button>`;
       card.appendChild(item);
+      } // end else standard task
     });
 
     updateProgress();
+  }
+
+  function toggleStep(sid) {
+    state.checks[sid] = !state.checks[sid];
+    render();
+    queueSave();
   }
 
   // ── ACTIONS ──
@@ -425,8 +470,20 @@
   }
 
   function updateProgress() {
-    const total = TASKS.length;
-    const done = TASKS.filter(t => state.checks[t.id]).length;
+    let total = 0, done = 0;
+    TASKS.forEach(task => {
+      if (task.type === 'infoblock') return;
+      if (task.type === 'article') {
+        task.steps.forEach(s => {
+          const sid = s.split(':')[0];
+          total++;
+          if (state.checks[sid]) done++;
+        });
+      } else {
+        total++;
+        if (state.checks[task.id]) done++;
+      }
+    });
     const pct = total ? Math.round((done/total)*100) : 0;
     document.getElementById('progressFill').style.width = pct + '%';
     document.getElementById('progressText').textContent = done + ' of ' + total + ' complete';
